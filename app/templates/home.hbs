@@ -7,7 +7,9 @@
         {{#each this.breakfastList as |breakfast index|}}
           <ul>
             <li>
-              {{breakfast}}
+              {{breakfast.name}}
+              {{breakfast.serving}}
+              {{breakfast.kcal}}
             </li>
           </ul>
         {{/each}}
@@ -21,12 +23,16 @@
       <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "dinner")}}> Search </button>
     </ul>
   </div>
-  <div class="product-list">
-    <ul>
+  <div class="product-list-container">
+    <ul class="product-list">
       {{#each this.products as |product|}}
-        <li>
-          <h3 {{on "click" (fn this.addFood product)}}>{{product.product_name}}</h3> | Kcal {{product.energy_100g}}
-        </li>
+        {{#if (and product.name product.kcal)}}
+          <li>
+            <h3 class="product-name" {{on "click" (fn this.addFood product)}}>{{product.name}}</h3>
+            <input type="number" id="serving" {{on "change" this.update}}> grams
+            <h4>Kcal {{product.kcal}}</h4>
+          </li>
+        {{/if}}
       {{/each}}
     </ul>
 
@@ -34,6 +40,5 @@
 </div>
 
 <Logout/>
-
 
 {{outlet}}

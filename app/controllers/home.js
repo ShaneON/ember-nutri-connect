@@ -10,6 +10,7 @@ export default class HomeController extends Controller {
   @tracked lunch;
   @tracked dinner;
   @tracked products;
+  @tracked serving;
 
   currentSection;
 
@@ -26,15 +27,25 @@ export default class HomeController extends Controller {
   async searchFood(mealType) {
     this.currentSection = mealType;
     const response = await fetch(
-      `https://world.openfoodfacts.org/api/v2/search?categories_tags_en=${this[mealType]}&fields=product_name,energy_100g&json=true&page_size=100`
+      `https://us-en.openfoodfacts.org/api/v2/search?categories_tags_en=${this[mealType]}&fields=product_name,energy_100g&json=true&page_size=100`
     );
     const foods = await response.json();
+    foods.products.forEach((product) => {
+      product.name = product.product_name;
+      product.kcal = product.energy_100g;
+      delete product.energy_100g;
+      delete product.product_name;
+      product.kcal = parseInt(product.kcal / 4.814);
+    })
     this.products = foods.products;
   }
 
   @action
   addFood(product) {
     const meal = `${this.currentSection}List`;
-    this[meal].pushObject(product.product_name);
+    let serving = parseFloat(this.serving) / 100.0;
+    product.kcal = serving * product.kcal;
+    product.serving = this.serving;
+    this[meal].pushObject(product);
   }
 }

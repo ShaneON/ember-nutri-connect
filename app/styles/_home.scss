@@ -6,9 +6,18 @@
     height: calc(100vh - 120px);
 }
 
-.product-list {
+.product-list-container {
     border: solid 1px;
     height: 300px;
-    width: 600px;
+    width: 900px;
     overflow: scroll;
+}
+
+.product-list {
+    width: 400px;
+}
+
+.product-name {
+    font-size: 14px;
+    width: 300px;
 }
