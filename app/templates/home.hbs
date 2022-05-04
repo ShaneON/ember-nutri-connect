@@ -1,0 +1,28 @@
+{{page-title "Home"}}
+
+Welcome to NutriConnect!
+
+<button type="button" class="btn btn-primary" {{on "click" this.logout}}>Logout</button>
+
+<div class="diary">
+  <ul>
+    <li>Breakfast</li>
+      {{#each this.breakfastList as |breakfast index|}}
+        <ul>
+          <li>
+            {{breakfast}}
+          </li>
+        </ul>
+      {{/each}}
+    <input type="text" id="breakfast" {{on "change" this.update}}>
+    <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "breakfast")}}> Search </button>
+    <li>Lunch</li>
+    <input type="text" id="lunch" {{on "change" this.update}}>
+    <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "lunch")}}> Search </button>
+    <li>Dinner</li>
+    <input type="text" id="dinner" {{on "change" this.update}}>
+    <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "dinner")}}> Search </button>
+  </ul>
+</div>
+
+{{outlet}}

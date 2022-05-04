@@ -1,0 +1,15 @@
+{{page-title "Login"}}
+<h1>Welcome to NutriConnect</h1>
+
+<h2>Please login to continue</h2>
+
+<form>
+  <label for="email">Email:</label><br>
+  <input type="text" id="email" name="email" {{on "change" this.update}}><br>
+  <label for="pw">Password:</label><br>
+  <input type="text" id="password" name="password" {{on "change" this.update}}><br><br>
+  <input type="submit" value="Login" {{on "click" this.login}}>
+</form> 
+
+{{log this.error}}
+{{outlet}}

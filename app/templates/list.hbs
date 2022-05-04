@@ -1,0 +1,11 @@
+{{page-title "List"}}
+
+<div class="jumbotron text-center">
+    <LinkTo @route="list.vegan" class="link"><h1>Vegan</h1></LinkTo>
+    <LinkTo @route="list.omni" class="link"><h1>Omnivore</h1></LinkTo>
+    <button type="button" class="btn btn-primary"> Recipe {{this.cartCount}}  </button> 
+
+     
+</div>
+
+{{outlet}}

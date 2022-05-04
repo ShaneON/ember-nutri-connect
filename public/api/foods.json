@@ -1,0 +1,25 @@
+{
+    "foods": [
+    
+        {
+            "id": "1",
+            "name": "jam",
+            "cost": "low"
+        },
+        {
+            "id": "2",
+            "name": "beer",
+            "cost": "high"
+        },
+        {
+            "id": "3",
+            "name": "quorn",
+            "cost": "moderate"
+        },
+        {
+            "id": "4",
+            "name": "daiya",
+            "cost": "high"
+        }
+    ]
+} 

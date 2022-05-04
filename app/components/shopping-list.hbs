@@ -1,0 +1,23 @@
+{{yield}}
+<ul>
+    {{#each @foods as |food|}}
+        <li>
+            <span>
+                
+                Name: 
+                <h3 data-test-food-name class="food-name"></h3> 
+                <LinkTo @route="vegan.food" @model={{food}}>
+                    {{food.name}}
+                </LinkTo>
+                | 
+                 Cost:
+                <h3 data-test-food-cost class="food-name">{{currency food.cost}} </h3>
+                <button data-test-delete-item type="button" class="btn btn-primary" {{on "click" (fn @deleteItem food)}}> delete </button>
+                <button type="button" class="btn btn-warning" {{on "click" (fn this.addToRecipe food)}}> Add to recipe </button>
+            </span> 
+        </li>
+    {{/each}}
+</ul>
+<input type="text" {{on "change" @nameChanged}}>
+<input type="text" {{on "change" @attributeChanged}}>
+<button data-test-add-item type="button" class="btn btn-primary" {{on "click" @addItem}}> add </button>

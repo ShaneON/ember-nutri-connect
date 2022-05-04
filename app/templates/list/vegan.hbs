@@ -1,0 +1,14 @@
+{{page-title "Vegan"}}
+
+<ShoppingList
+    @foods={{this.model}}
+    @nameChanged={{this.nameChanged}}
+    @deleteItem={{this.deleteItem}}
+    @addItem={{this.addItem}}
+    @attributeChanged={{this.attributeChanged}}>
+    <h1> Vegan Shopping List </h1>
+</ShoppingList>
+
+
+
+{{outlet}}
