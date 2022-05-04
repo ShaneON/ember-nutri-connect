@@ -5,6 +5,6 @@ export default class HomeRoute extends Route {
   @service session;
 
   beforeModel(transition) {
-    this.session.requireAuthentication(transition, 'login');
+    //this.session.requireAuthentication(transition, 'login');
   }
 }

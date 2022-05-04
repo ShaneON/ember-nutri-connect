@@ -1,3 +1,14 @@
-.link {
-    text-decoration: none;
+.container {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: calc(100vh - 120px);
+}
+
+.product-list {
+    border: solid 1px;
+    height: 300px;
+    width: 600px;
+    overflow: scroll;
 }

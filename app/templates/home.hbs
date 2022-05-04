@@ -1,8 +1,5 @@
 {{page-title "Home"}}
 
-Welcome to NutriConnect!
-
-<Logout/>
 <div class="container">
   <div class="diary">
     <ul>
@@ -24,13 +21,19 @@ Welcome to NutriConnect!
       <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "dinner")}}> Search </button>
     </ul>
   </div>
-  <div>
-    {{#each this.products as |product|}}
-      {{product.product_name}} : {{product.energy_100g}}
+  <div class="product-list">
+    <ul>
+      {{#each this.products as |product|}}
+        <li>
+          {{product.product_name}} : {{product.energy_100g}}
+        </li>
+      {{/each}}
+    </ul>
 
-    {{/each}}
   </div>
 </div>
+
+<Logout/>
 
 
 {{outlet}}
