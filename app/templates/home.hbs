@@ -25,7 +25,7 @@
     <ul>
       {{#each this.products as |product|}}
         <li>
-          {{product.product_name}} : {{product.energy_100g}}
+          <h3 {{on "click" (fn this.addFood product)}}>{{product.product_name}}</h3> | Kcal {{product.energy_100g}}
         </li>
       {{/each}}
     </ul>

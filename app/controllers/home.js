@@ -11,9 +11,11 @@ export default class HomeController extends Controller {
   @tracked dinner;
   @tracked products;
 
-  breakfastList = ['Croissant', 'Muesli', 'Eggs and Tomatoes'];
-  lunchList = ['Sandwich', 'Crisps', 'Beer'];
-  dinnerList = ['Steak', 'Potato', 'Pasta and Tuna'];
+  currentSection;
+
+  @tracked breakfastList = [];
+  @tracked lunchList = [];
+  @tracked dinnerList = [];
 
   @action
   update(event) {
@@ -22,10 +24,17 @@ export default class HomeController extends Controller {
 
   @action
   async searchFood(mealType) {
+    this.currentSection = mealType;
     const response = await fetch(
       `https://world.openfoodfacts.org/api/v2/search?categories_tags_en=${this[mealType]}&fields=product_name,energy_100g&json=true&page_size=100`
     );
     const foods = await response.json();
     this.products = foods.products;
+  }
+
+  @action
+  addFood(product) {
+    const meal = `${this.currentSection}List`;
+    this[meal].pushObject(product.product_name);
   }
 }
