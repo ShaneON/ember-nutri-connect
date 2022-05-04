@@ -24,5 +24,5 @@ export default Base.extend({
       let error = await response.text();
       throw new Error(error);
     }
-  }
+  },
 });

@@ -2,27 +2,35 @@
 
 Welcome to NutriConnect!
 
-<button type="button" class="btn btn-primary" {{on "click" this.logout}}>Logout</button>
+<Logout/>
+<div class="container">
+  <div class="diary">
+    <ul>
+      <li>Breakfast</li>
+        {{#each this.breakfastList as |breakfast index|}}
+          <ul>
+            <li>
+              {{breakfast}}
+            </li>
+          </ul>
+        {{/each}}
+      <input type="text" id="breakfast" {{on "change" this.update}}>
+      <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "breakfast")}}> Search </button>
+      <li>Lunch</li>
+      <input type="text" id="lunch" {{on "change" this.update}}>
+      <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "lunch")}}> Search </button>
+      <li>Dinner</li>
+      <input type="text" id="dinner" {{on "change" this.update}}>
+      <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "dinner")}}> Search </button>
+    </ul>
+  </div>
+  <div>
+    {{#each this.products as |product|}}
+      {{product.product_name}} : {{product.energy_100g}}
 
-<div class="diary">
-  <ul>
-    <li>Breakfast</li>
-      {{#each this.breakfastList as |breakfast index|}}
-        <ul>
-          <li>
-            {{breakfast}}
-          </li>
-        </ul>
-      {{/each}}
-    <input type="text" id="breakfast" {{on "change" this.update}}>
-    <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "breakfast")}}> Search </button>
-    <li>Lunch</li>
-    <input type="text" id="lunch" {{on "change" this.update}}>
-    <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "lunch")}}> Search </button>
-    <li>Dinner</li>
-    <input type="text" id="dinner" {{on "change" this.update}}>
-    <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "dinner")}}> Search </button>
-  </ul>
+    {{/each}}
+  </div>
 </div>
+
 
 {{outlet}}
