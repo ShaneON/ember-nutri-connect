@@ -1,6 +1,14 @@
 {{page-title "Home"}}
 
 <div class="home-container">
+  <div class="nutrition-container">
+    <h3 class="nutrition-facts">Calories: {{number-format this.kcalTotal}}</h3>
+    <h3 class="nutrition-facts">Protein: {{number-format this.proteinTotal}}</h3>
+    <h3 class="nutrition-facts">Fat: {{number-format this.fatTotal}}</h3>
+    <h3 class="nutrition-facts">Carbs: {{number-format this.carbsTotal}}</h3>
+    <h3 class="nutrition-facts">Sodium: {{number-format this.sodiumTotal}}</h3>
+    <h3 class="nutrition-facts">Fiber: {{number-format this.fiberTotal}}</h3>
+  </div>
   <BasicDropdown as |dd|>
     <dd.Trigger class='trigger-bootstrap-feel'>Select a meal <span class='caret'></span></dd.Trigger>
     <dd.Content {{on 'mouseleave' (fn this.closeLater dd)}} class='content-bootstrap-feel'>
@@ -12,7 +20,6 @@
       <p {{on "click" this.mealSelected}}>Snack</p>
     </dd.Content>
   </BasicDropdown>
-  {{this.kcalTotal}}
   <div class="diary">
     <ul>
       {{#each this.meals as |meal|}}
@@ -42,25 +49,30 @@
       {{/each}}
     </ul>
   </div>
-  <div class="product-list-container">
-    <div class="product-list-header">
-      <h6 class="product-list-header-title">Name</h6>
-      <h6 class="product-list-header-title">Serving</h6>
-      <h6 class="product-list-header-title">Kcal</h6>
-    </div>
-    <ul class="product-list">
-      {{#each this.products as |product|}}
-        {{#if (and product.name product.kcal)}}
-          <li class="product-list-item">
-            <h3 class="product-name" {{on "click" (fn this.addFood product)}}>{{product.name}}</h3>
-            <div class="input-container"><input class="product-list-input" type="number" id="serving" value="100" {{on "change" this.update}}> <p>grams</p></div>
-            <p>{{product.kcal}} kcal</p>
-          </li>
-        {{/if}}
-      {{/each}}
-    </ul>
-  </div>
 </div>
+
+{{#if this.isShowingModal}}
+  <ModalDialog>
+    <div class="product-list-container">
+      <div class="product-list-header">
+        <h6 class="product-list-header-title">Name</h6>
+        <h6 class="product-list-header-title">Serving</h6>
+        <h6 class="product-list-header-title">Kcal</h6>
+      </div>
+      <ul class="product-list">
+        {{#each this.products as |product|}}
+          {{#if (and product.name product.kcal)}}
+            <li class="product-list-item">
+              <h3 class="product-name" {{on "click" (fn this.addFood product)}}>{{product.name}}</h3>
+              <div class="input-container"><input class="product-list-input" type="number" id="serving" value="100" {{on "change" this.update}}> <p>grams</p></div>
+              <p>{{product.kcal}} kcal</p>
+            </li>
+          {{/if}}
+        {{/each}}
+      </ul>
+    </div>
+  </ModalDialog>
+{{/if}}
 
 <Logout/>
 
