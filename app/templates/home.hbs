@@ -1,26 +1,35 @@
 {{page-title "Home"}}
 
 <div class="container">
+  <BasicDropdown as |dd|>
+    <dd.Trigger class='trigger-bootstrap-feel'>Click me <span class='caret'></span></dd.Trigger>
+    <dd.Content {{on 'mouseleave' (fn this.closeLater dd)}} class='content-bootstrap-feel'>
+      <p {{on "click" this.mealSelected}}>Breakfast</p>
+      <p {{on "click" this.mealSelected}}>Lunch</p>
+      <p {{on "click" this.mealSelected}}>Brunch</p>
+      <p {{on "click" this.mealSelected}}>Dinner</p>
+      <p {{on "click" this.mealSelected}}>Supper</p>
+      <p {{on "click" this.mealSelected}}>Snack</p>
+    </dd.Content>
+  </BasicDropdown>
   <div class="diary">
     <ul>
-      <li>Breakfast</li>
-        {{#each this.breakfastList as |breakfast index|}}
-          <ul>
-            <li>
-              {{breakfast.name}}
-              {{breakfast.serving}}
-              {{breakfast.kcal}}
-            </li>
-          </ul>
-        {{/each}}
-      <input type="text" id="breakfast" {{on "change" this.update}}>
-      <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "breakfast")}}> Search </button>
-      <li>Lunch</li>
-      <input type="text" id="lunch" {{on "change" this.update}}>
-      <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "lunch")}}> Search </button>
-      <li>Dinner</li>
-      <input type="text" id="dinner" {{on "change" this.update}}>
-      <button type="button" class="btn btn-primary" {{on "click" (fn this.searchFood "dinner")}}> Search </button>
+      {{#each this.meals as |meal|}}
+        <li class="meal-list-item" {{on "click" (fn this.changeSection meal)}}>{{meal.name}}</li>
+        {{#if (eq this.currentSection meal)}}
+          {{#each meal.foods as |food index|}}
+            <ul>
+              <li>
+                {{food.name}}
+                {{food.serving}}
+                {{food.kcal}}
+              </li>
+            </ul>
+          {{/each}}
+          <input type="text" id="food" {{on "change" this.update}}>
+          <button type="button" class="btn btn-primary" {{on "click" this.searchFood}}> Search </button>
+        {{/if}}
+      {{/each}}
     </ul>
   </div>
   <div class="product-list-container">
@@ -35,7 +44,6 @@
         {{/if}}
       {{/each}}
     </ul>
-
   </div>
 </div>
 

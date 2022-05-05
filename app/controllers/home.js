@@ -2,21 +2,20 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { later, cancel } from '@ember/runloop';
 
 export default class HomeController extends Controller {
   @service session;
+  @service store;
 
-  @tracked breakfast;
-  @tracked lunch;
-  @tracked dinner;
   @tracked products;
-  @tracked serving;
 
-  currentSection;
+  @tracked currentSection;
 
-  @tracked breakfastList = [];
-  @tracked lunchList = [];
-  @tracked dinnerList = [];
+  @tracked meals = [];
+
+  serving;
+  food;
 
   @action
   update(event) {
@@ -24,10 +23,30 @@ export default class HomeController extends Controller {
   }
 
   @action
-  async searchFood(mealType) {
-    this.currentSection = mealType;
+  changeSection(section) {
+    this.currentSection = section;
+  }
+
+  @action
+  mealSelected(event) {
+    this.meals.pushObject({
+      name: event.target.innerText,
+      foods: []
+    });
+  }
+
+  @action
+  closeLater(dropdown) {
+    this.closeTimer = later(() => {
+      this.closeTimer = null;
+      dropdown.actions.close();
+    }, 200);
+  }
+
+  @action
+  async searchFood() {
     const response = await fetch(
-      `https://us-en.openfoodfacts.org/api/v2/search?categories_tags_en=${this[mealType]}&fields=product_name,energy_100g&json=true&page_size=100`
+      `https://us-en.openfoodfacts.org/api/v2/search?categories_tags_en=${this.food}&fields=product_name,energy_100g&json=true&page_size=100`
     );
     const foods = await response.json();
     foods.products.forEach((product) => {
@@ -36,16 +55,15 @@ export default class HomeController extends Controller {
       delete product.energy_100g;
       delete product.product_name;
       product.kcal = parseInt(product.kcal / 4.814);
-    })
+    });
     this.products = foods.products;
   }
 
   @action
   addFood(product) {
-    const meal = `${this.currentSection}List`;
     let serving = parseFloat(this.serving) / 100.0;
     product.kcal = serving * product.kcal;
     product.serving = this.serving;
-    this[meal].pushObject(product);
+    this.currentSection.foods.pushObject(product);
   }
 }
