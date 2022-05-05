@@ -6,12 +6,26 @@
     height: calc(100vh - 120px);
 }
 
+.diary {
+    border: solid 1px;
+    height: 300px;
+    width: 300px;
+}
+
 .product-list-container {
     border: solid 1px;
     height: 300px;
-    width: 900px;
+    width: 600px;
     overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.product-list-container::-webkit-scrollbar {
+    display: none;
+}
+
 
 .product-list {
     width: 400px;
@@ -25,3 +39,29 @@
 .meal-list-item {
     cursor: pointer;
 }
+
+.close {
+    position: absolute;
+    width: 16px;
+    top: 115px;
+    left: 400px;
+    height: 16px;
+    opacity: 0.3;
+  }
+  .close:hover {
+    opacity: 1;
+  }
+  .close:before, .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 17px;
+    width: 2px;
+    background-color: #333;
+  }
+  .close:before {
+    transform: rotate(45deg);
+  }
+  .close:after {
+    transform: rotate(-45deg);
+  }

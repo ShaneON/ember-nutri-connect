@@ -10,13 +10,10 @@ export default class HomeRoute extends Route {
   }
 
   model() {
-    return this.store.createRecord('diary', {
-      date: Date.now()
-    });
   }
 
-  setupController(model, controller) {
-    this._super(...arguments);
-    controller.diary = model;
-  }
+  // setupController(model, controller) {
+  //   this._super(...arguments);
+  //   controller.diary = model;
+  // }
 }

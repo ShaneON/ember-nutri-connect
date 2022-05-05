@@ -2,7 +2,7 @@
 
 <div class="container">
   <BasicDropdown as |dd|>
-    <dd.Trigger class='trigger-bootstrap-feel'>Click me <span class='caret'></span></dd.Trigger>
+    <dd.Trigger class='trigger-bootstrap-feel'>Select a meal <span class='caret'></span></dd.Trigger>
     <dd.Content {{on 'mouseleave' (fn this.closeLater dd)}} class='content-bootstrap-feel'>
       <p {{on "click" this.mealSelected}}>Breakfast</p>
       <p {{on "click" this.mealSelected}}>Lunch</p>
@@ -16,6 +16,7 @@
     <ul>
       {{#each this.meals as |meal|}}
         <li class="meal-list-item" {{on "click" (fn this.changeSection meal)}}>{{meal.name}}</li>
+        <div {{on "click" (fn this.removeSection meal)}} class="close"></div>
         {{#if (eq this.currentSection meal)}}
           {{#each meal.foods as |food index|}}
             <ul>

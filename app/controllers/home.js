@@ -29,10 +29,11 @@ export default class HomeController extends Controller {
 
   @action
   mealSelected(event) {
-    this.meals.pushObject({
+    this.currentSection = this.meals.pushObject({
       name: event.target.innerText,
       foods: []
     });
+    
   }
 
   @action
@@ -65,5 +66,10 @@ export default class HomeController extends Controller {
     product.kcal = serving * product.kcal;
     product.serving = this.serving;
     this.currentSection.foods.pushObject(product);
+  }
+
+  @action
+  removeSection(meal) {
+    this.meals.removeObject(meal);
   }
 }
