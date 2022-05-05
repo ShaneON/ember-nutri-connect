@@ -9,8 +9,7 @@ export default class HomeRoute extends Route {
     //this.session.requireAuthentication(transition, 'login');
   }
 
-  model() {
-  }
+  model() {}
 
   // setupController(model, controller) {
   //   this._super(...arguments);

@@ -2,19 +2,20 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { later, cancel } from '@ember/runloop';
+import { later } from '@ember/runloop';
+
+const SERVING_DEFAULT = 100;
 
 export default class HomeController extends Controller {
   @service session;
   @service store;
 
   @tracked products;
-
   @tracked currentSection;
-
   @tracked meals = [];
+  @tracked kcalTotal = 0;
 
-  serving;
+  serving = SERVING_DEFAULT;
   food;
 
   @action
@@ -29,11 +30,12 @@ export default class HomeController extends Controller {
 
   @action
   mealSelected(event) {
-    this.currentSection = this.meals.pushObject({
+    const currentSection = this.meals.pushObject({
       name: event.target.innerText,
-      foods: []
+      foods: [],
     });
-    
+
+    this.currentSection = currentSection;
   }
 
   @action
@@ -63,13 +65,31 @@ export default class HomeController extends Controller {
   @action
   addFood(product) {
     let serving = parseFloat(this.serving) / 100.0;
-    product.kcal = serving * product.kcal;
+    const kcalByServing = serving * product.kcal;
+
+    product.kcal = kcalByServing;
     product.serving = this.serving;
+
+    this.kcalTotal += kcalByServing;
     this.currentSection.foods.pushObject(product);
+    this.serving = SERVING_DEFAULT;
   }
 
   @action
   removeSection(meal) {
+    const mealKcals = meal.foods.reduce((previous, current) => {
+      return previous + current.kcal;
+    }, 0);
+    this.kcalTotal -= mealKcals;
+    const index = this.meals.indexOf(meal);
     this.meals.removeObject(meal);
+    if (meal === this.currentSection && this.meals.length) 
+      this.currentSection = this.meals[index - 1];
+  }
+
+  @action
+  removeFood(food, meal) {
+    this.kcalTotal -= food.kcal;
+    meal.foods.removeObject(food);
   }
 }

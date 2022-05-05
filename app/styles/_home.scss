@@ -1,4 +1,5 @@
-.container {
+.home-container {
+    width: 100%;
     padding-top: 30px;
     display: flex;
     flex-direction: row;
@@ -6,62 +7,12 @@
     height: calc(100vh - 120px);
 }
 
-.diary {
-    border: solid 1px;
-    height: 300px;
-    width: 300px;
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
-.product-list-container {
-    border: solid 1px;
-    height: 300px;
-    width: 600px;
-    overflow: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+p {
+    font-size: 12px;
 }
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.product-list-container::-webkit-scrollbar {
-    display: none;
-}
-
-
-.product-list {
-    width: 400px;
-}
-
-.product-name {
-    font-size: 14px;
-    width: 300px;
-}
-
-.meal-list-item {
-    cursor: pointer;
-}
-
-.close {
-    position: absolute;
-    width: 16px;
-    top: 115px;
-    left: 400px;
-    height: 16px;
-    opacity: 0.3;
-  }
-  .close:hover {
-    opacity: 1;
-  }
-  .close:before, .close:after {
-    position: absolute;
-    left: 15px;
-    content: ' ';
-    height: 17px;
-    width: 2px;
-    background-color: #333;
-  }
-  .close:before {
-    transform: rotate(45deg);
-  }
-  .close:after {
-    transform: rotate(-45deg);
-  }

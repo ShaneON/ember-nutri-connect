@@ -1,0 +1,28 @@
+.diary {
+    border: solid 1px;
+    height: 300px;
+    width: 400px;
+    padding: 10px;
+}
+
+.meal-list-item {
+    cursor: pointer;
+    width: 50px;
+    min-height: 50px;
+}
+
+.close {
+    font-weight: 700;
+    margin-left: 60px;
+    cursor: pointer;
+}
+
+.meal-list-item-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.food-list-item {
+    display: flex;
+    flex-direction: row;
+}
