@@ -1,5 +1,7 @@
 {{page-title "Home"}}
 
+{{log this.model}}
+
 <div class="home-container">
   <div class="nutrition-container">
     <h3 class="nutrition-facts">Calories: {{number-format this.kcalTotal}}</h3>
@@ -10,7 +12,7 @@
     <h3 class="nutrition-facts">Fiber: {{number-format this.fiberTotal}}</h3>
   </div>
   <BasicDropdown as |dd|>
-    <dd.Trigger class='trigger-bootstrap-feel'>Select a meal <span class='caret'></span></dd.Trigger>
+    <dd.Trigger class='trigger-bootstrap-feel'>Add a meal <span class='caret'></span></dd.Trigger>
     <dd.Content {{on 'mouseleave' (fn this.closeLater dd)}} class='content-bootstrap-feel'>
       <p {{on "click" this.mealSelected}}>Breakfast</p>
       <p {{on "click" this.mealSelected}}>Lunch</p>

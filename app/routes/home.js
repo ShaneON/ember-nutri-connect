@@ -6,10 +6,12 @@ export default class HomeRoute extends Route {
   @service store;
 
   beforeModel(transition) {
-    //this.session.requireAuthentication(transition, 'login');
+    this.session.requireAuthentication(transition, 'login');
   }
 
-  model() {}
+  model() {
+    return this.store.findRecord('user', this.session.data.authenticated.id);
+  }
 
   // setupController(model, controller) {
   //   this._super(...arguments);

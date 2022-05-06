@@ -6,3 +6,17 @@
 @import 'products';
 @import "ember-modal-dialog/ember-modal-structure";
 @import "ember-modal-dialog/ember-modal-appearance";
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    font-size: 12px;
+}
+
+.ember-modal-overlay {
+    background-color: rgba(30,40,55,0.5);
+}

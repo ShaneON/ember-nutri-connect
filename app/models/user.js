@@ -6,4 +6,5 @@ export default class UserModel extends Model {
   @attr('string') name;
   @attr('string') email;
   @attr('number') weight;
+  @attr('number') kcalDaily;
 }
