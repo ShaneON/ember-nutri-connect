@@ -1,79 +1,70 @@
 {{page-title "Home"}}
 
-{{log this.model}}
-
 <div class="home-container">
-  <div class="nutrition-container">
-    <h3 class="nutrition-facts">Calories: {{number-format this.kcalTotal}}</h3>
-    <h3 class="nutrition-facts">Protein: {{number-format this.proteinTotal}}</h3>
-    <h3 class="nutrition-facts">Fat: {{number-format this.fatTotal}}</h3>
-    <h3 class="nutrition-facts">Carbs: {{number-format this.carbsTotal}}</h3>
-    <h3 class="nutrition-facts">Sodium: {{number-format this.sodiumTotal}}</h3>
-    <h3 class="nutrition-facts">Fiber: {{number-format this.fiberTotal}}</h3>
-  </div>
-  <BasicDropdown as |dd|>
-    <dd.Trigger class='trigger-bootstrap-feel'>Add a meal <span class='caret'></span></dd.Trigger>
-    <dd.Content {{on 'mouseleave' (fn this.closeLater dd)}} class='content-bootstrap-feel'>
-      <p {{on "click" this.mealSelected}}>Breakfast</p>
-      <p {{on "click" this.mealSelected}}>Lunch</p>
-      <p {{on "click" this.mealSelected}}>Brunch</p>
-      <p {{on "click" this.mealSelected}}>Dinner</p>
-      <p {{on "click" this.mealSelected}}>Supper</p>
-      <p {{on "click" this.mealSelected}}>Snack</p>
-    </dd.Content>
-  </BasicDropdown>
-  <div class="diary">
-    <ul>
-      {{#each this.meals as |meal|}}
-        <div class="meal-list-item-container">
-          <li class="meal-list-item" {{on "click" (fn this.changeSection meal)}}>
-            <h5>{{meal.name}}</h5>
-          </li>
-          <div {{on "click" (fn this.removeSection meal)}} class="close">x</div>
-        </div>
-        {{#if (eq this.currentSection.name meal.name)}}
-          {{#each meal.foods as |food index|}}
-            <ul>
-              <li class="food-list-item">
-                {{food.name}}
-                {{food.serving}}
-                {{food.kcal}}
-                <div {{on "click" (fn this.removeFood food meal)}} class="close">x</div>
-              </li>
-              
-            </ul>
-          {{/each}}
-          <div class="meal-list-item-container">
-            <input type="text" id="food" {{on "change" this.update}}>
-            <button type="button" class="btn btn-primary" {{on "click" this.searchFood}}> Search </button>
-          </div>
-        {{/if}}
-      {{/each}}
-    </ul>
-  </div>
+	<div class="nutrition-container">
+		<h3 class="nutrition-facts">Calories: {{number-format this.kcalTotal}}</h3>
+		<h3 class="nutrition-facts">Protein: {{number-format this.proteinTotal}}</h3>
+		<h3 class="nutrition-facts">Fat: {{number-format this.fatTotal}}</h3>
+		<h3 class="nutrition-facts">Carbs: {{number-format this.carbsTotal}}</h3>
+		<h3 class="nutrition-facts">Sodium: {{number-format this.sodiumTotal}}</h3>
+		<h3 class="nutrition-facts">Fiber: {{number-format this.fiberTotal}}</h3>
+	</div>
+	<div class="diary">
+		<Dropdown
+			@mealList={{this.mealList}}
+			@mealSelected={{this.mealSelected}}
+			@closeLater={{this.closeLater}} />
+		<ul>
+			{{#each this.meals as |meal|}}
+				<div class="meal-list-item-container">
+					<li class="meal-list-item" {{on "click" (fn this.changeSection meal)}}>
+						<h5>{{meal.name}}</h5>
+					</li>
+					<div {{on "click" (fn this.removeSection meal)}} class="close">x</div>
+				</div>
+				{{#if (eq this.currentSection.name meal.name)}}
+					{{#each meal.foods as |food index|}}
+						<ul>
+							<li class="food-list-item">
+								{{food.name}}
+								{{food.serving}}
+								{{food.kcal}}
+								<div {{on "click" (fn this.removeFood food meal)}} class="close">x</div>
+							</li>
+							
+						</ul>
+					{{/each}}
+					<div class="meal-list-item-container">
+						<input type="text" id="food" {{on "change" this.update}}>
+						<button type="button" class="btn btn-primary" {{on "click" this.searchFood}}> Search </button>
+					</div>
+				{{/if}}
+			{{/each}}
+		</ul>
+	</div>
 </div>
 
 {{#if this.isShowingModal}}
-  <ModalDialog>
-    <div class="product-list-container">
-      <div class="product-list-header">
-        <h6 class="product-list-header-title">Name</h6>
-        <h6 class="product-list-header-title">Serving</h6>
-        <h6 class="product-list-header-title">Kcal</h6>
-      </div>
-      <ul class="product-list">
-        {{#each this.products as |product|}}
-          {{#if (and product.name product.kcal)}}
-            <li class="product-list-item">
-              <h3 class="product-name" {{on "click" (fn this.addFood product)}}>{{product.name}}</h3>
-              <div class="input-container"><input class="product-list-input" type="number" id="serving" value="100" {{on "change" this.update}}> <p>grams</p></div>
-              <p>{{product.kcal}} kcal</p>
-            </li>
-          {{/if}}
-        {{/each}}
-      </ul>
-    </div>
-  </ModalDialog>
+	<ModalDialog>
+		<div class="product-list-container">
+			<div class="product-list-header">
+				<h6 class="product-list-header-title">Name</h6>
+				<h6 class="product-list-header-title">Serving</h6>
+				<h6 class="product-list-header-title">Kcal</h6>
+			</div>
+			<ul class="product-list">
+				{{#each this.products as |product|}}
+					{{#if (and product.name product.kcal)}}
+						<li class="product-list-item">
+							<h3 class="product-name" {{on "click" (fn this.addFood product)}}>{{product.name}}</h3>
+							<div class="input-container"><input class="product-list-input" type="number" id="serving" value="100" {{on "change" this.update}}> <p>grams</p></div>
+							<p>{{product.kcal}} kcal</p>
+						</li>
+					{{/if}}
+				{{/each}}
+			</ul>
+		</div>
+	</ModalDialog>
 {{/if}}
 
 <Logout/>

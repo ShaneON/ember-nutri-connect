@@ -17,4 +17,8 @@ export default class ApplicationAdapter extends RESTAdapter {
 
     return headers;
   }
+
+  buildURL(...args) {
+    return `${super.buildURL(...args)}`;
+  }
 }

@@ -1,5 +1,5 @@
 import EmberRouter from '@ember/routing/router';
-import config from 'ember-practice/config/environment';
+import config from 'ember-nutri-connect/config/environment';
 
 export default class Router extends EmberRouter {
   location = config.locationType;

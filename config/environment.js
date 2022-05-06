@@ -2,7 +2,7 @@
 
 module.exports = function (environment) {
   let ENV = {
-    modulePrefix: 'ember-practice',
+    modulePrefix: 'ember-nutri-connect',
     environment,
     rootURL: '/',
     locationType: 'history',

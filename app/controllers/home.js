@@ -5,6 +5,7 @@ import { tracked } from '@glimmer/tracking';
 import { later } from '@ember/runloop';
 
 const SERVING_DEFAULT = 100;
+const MEALS = ['Breakfast', 'Lunch', 'Dinner', 'Snack', 'Brunch', 'Supper'];
 
 export default class HomeController extends Controller {
   @service session;
@@ -22,6 +23,7 @@ export default class HomeController extends Controller {
   @tracked isShowingModal = false;
 
   serving = SERVING_DEFAULT;
+  mealList = MEALS;
   food;
 
   @action
