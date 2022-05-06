@@ -10,11 +10,15 @@ export default class HomeRoute extends Route {
   }
 
   model() {
-    return this.store.findRecord('user', this.session.data.authenticated.id);
+    return {
+      user: this.store.findRecord('user', this.session.data.authenticated.id)
+    }
   }
 
-  // setupController(model, controller) {
-  //   this._super(...arguments);
-  //   controller.diary = model;
-  // }
+  setupController(controller, model) {
+    console.log(model)
+    this._super(...arguments);
+    let { user } = model;
+    controller.user = user;
+  }
 }

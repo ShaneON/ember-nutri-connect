@@ -1,3 +1,12 @@
+.product-list-container {
+    border: solid 1px;
+    height: 300px;
+    width: 600px;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
 .product-list-header {
     display: flex;
     flex-direction: row;
@@ -6,20 +15,7 @@
     align-items: center;
     height: 25px;
     margin-bottom: 10px;
-}
-
-.product-list-header-title {
-    margin: 0;
     font-size: 12px;
-}
-
-.product-list-container {
-    border: solid 1px;
-    height: 300px;
-    width: 600px;
-    overflow: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
 }
 
 .product-list-item {
