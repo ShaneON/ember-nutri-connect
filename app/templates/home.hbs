@@ -4,7 +4,11 @@
 	<h2 class="home-title">{{this.user.firstName}}'s Nutrition Page</h2>
 	<div class="home-content">
 		<div class="user-info-container">
-			<h3 class="user-info-header">{{this.user.firstName}}'s Stats</h3>
+			<div class="user-info-header">
+				<div>
+					{{this.user.firstName}}'s Stats
+				</div>
+			</div>
 			<div class="user-info-content">
 				<ul>
 					<li class="user-info-list-item">Daily Calories: {{this.user.kcalDaily}}</li>
@@ -13,7 +17,11 @@
 			</div>
 		</div>
 		<div class="nutrition-container">
-			<h3 class="nutrition-header">Nutrition Stats</h3>
+			<div class="nutrition-header">
+				<div>
+					Nutrition Stats
+				</div>
+			</div>
 			<div class="nutrition-content">
 				<ul>
 					<li class="nutrition-list-item">Calories: {{number-format this.kcalTotal}} / {{this.user.kcalDaily}}</li>
@@ -26,7 +34,11 @@
 			</div>
 		</div>
 		<div class="diary-container">
-			<h3 class="diary-header">Meal Planner</h3>
+			<div class="diary-header">
+				<div>
+					Meal Planner
+				</div>	
+			</div>
 			<div class="diary-content">
 				<ul>
 					{{#each this.meals as |meal|}}

@@ -1,17 +1,19 @@
 .nutrition-container {
   background-color: #FCFEFF;
   border: solid 1px #bdbdbd;
-  border-radius: 3px;
+  border-radius: 5px;
   height: 400px;
   width: 300px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .nutrition-header {
+  height: 20px;
   font-weight: 700;
   font-size: 13px;
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: #8BACE4;
 }
 
