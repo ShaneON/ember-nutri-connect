@@ -72,7 +72,9 @@ export default class HomeController extends Controller {
       product.kcal = product.energy_100g ? product.energy_100g : 0;
       product.protein = product.proteins_100g ? product.proteins_100g : 0;
       product.fat = product.fat_100g ? product.fat_100g : 0;
-      product.carbs = product.carbohydrates_100g ? product.carbohydrates_100g : 0;
+      product.carbs = product.carbohydrates_100g
+        ? product.carbohydrates_100g
+        : 0;
       product.sodium = product.sodium_100g ? product.sodium_100g : 0;
       product.fiber = product.fiber_100g ? product.fiber_100g : 0;
 

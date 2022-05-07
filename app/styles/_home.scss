@@ -1,24 +1,63 @@
 .home-container {
-    width: 100%;
-    padding-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: calc(100vh - 120px);
+  width: 100%;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - 120px);
 }
 
 .nutrition-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .home-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .home-title {
-    font-size: 18px;
+  font-size: 18px;
+}
+
+.list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: solid 1px #E6E6E6;
+  background-color: #F4F4F4;
+  padding-left: 10px;
+
+  &:last-child {
+    border-bottom: solid 1px #E6E6E6;
+    margin-bottom: 10px;
+  }
+}
+
+.list-item-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 90%;
+}
+
+.list-item-header-container {
+  padding-left: 10px;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 16px;
+}
+
+.list-item-item {
+
+  width: 20%;
+
+  &:first-child {
+    width: 60%;
+  }
 }

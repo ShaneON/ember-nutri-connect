@@ -10,15 +10,18 @@ export default class HomeRoute extends Route {
   }
 
   async model() {
-    let user = await this.store.findRecord('user', this.session.data.authenticated.id);
+    let user = await this.store.findRecord(
+      'user',
+      this.session.data.authenticated.id
+    );
     return {
-      user: user
+      user: user,
     };
   }
 
   setupController(controller, model) {
-    console.log(model)
-    this._super(...arguments);
+    console.log(model);
+    super.setupController(...arguments);
     let { user } = model;
     controller.user = user;
   }

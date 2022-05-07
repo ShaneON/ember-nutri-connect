@@ -7,8 +7,8 @@
 			<h3 class="user-info-header">{{this.user.firstName}}'s Stats</h3>
 			<div class="user-info-content">
 				<ul>
-					<li>Daily Calories: {{this.user.kcalDaily}}</li>
-					<li>Current Weight: {{this.user.weight}}</li>
+					<li class="list-item">Daily Calories: {{this.user.kcalDaily}}</li>
+					<li class="list-item">Current Weight: {{this.user.weight}}</li>
 				</ul>
 			</div>
 		</div>
@@ -16,49 +16,55 @@
 			<h3 class="nutrition-header">Nutrition Stats</h3>
 			<div class="nutrition-content">
 				<ul>
-					<li>Calories: {{number-format this.kcalTotal}} / {{this.user.kcalDaily}}</li>
-					<li>Protein: {{number-format this.proteinTotal}}</li>
-					<li>Fat: {{number-format this.fatTotal}}</li>
-					<li>Carbs: {{number-format this.carbsTotal}}</li>
-					<li>Sodium: {{number-format this.sodiumTotal}}</li>
-					<li>Fiber: {{number-format this.fiberTotal}}</li>
+					<li class="list-item">Calories: {{number-format this.kcalTotal}} / {{this.user.kcalDaily}}</li>
+					<li class="list-item">Protein: {{number-format this.proteinTotal}}</li>
+					<li class="list-item">Fat: {{number-format this.fatTotal}}</li>
+					<li class="list-item">Carbs: {{number-format this.carbsTotal}}</li>
+					<li class="list-item">Sodium: {{number-format this.sodiumTotal}}</li>
+					<li class="list-item">Fiber: {{number-format this.fiberTotal}}</li>
 				</ul>
 			</div>
 		</div>
 		<div class="diary-container">
 			<h3 class="diary-header">Meal Planner</h3>
 			<div class="diary-content">
-				<Dropdown
-					@mealList={{this.mealList}}
-					@mealSelected={{this.mealSelected}}
-					@closeLater={{this.closeLater}} />
 				<ul>
 					{{#each this.meals as |meal|}}
 						<div class="meal-list-item-container">
 							<li class="meal-list-item" {{on "click" (fn this.changeSection meal)}}>
-								<h5>{{meal.name}}</h5>
+								<h5 class="meal-list-item-header">{{meal.name}}</h5>
 							</li>
 							<div {{on "click" (fn this.removeSection meal)}} class="close">x</div>
 						</div>
 						{{#if (eq this.currentSection.name meal.name)}}
-							{{#each meal.foods as |food index|}}
-								<ul>
-									<li class="food-list-item">
-										{{food.name}}
-										{{food.serving}}
-										{{food.kcal}}
+							<ul>
+								<div class="list-item-header-container">
+									<div class="list-item-item">Name</div>
+									<div class="list-item-item">Serving</div>
+									<div class="list-item-item">Calories</div>
+								</div>
+								{{#each meal.foods as |food index|}}
+									<li class="list-item">
+										<div class="list-item-content">
+											<div class="list-item-item">{{food.name}}</div>
+											<div class="list-item-item">{{food.serving}}</div>
+											<div class="list-item-item">{{food.kcal}}</div>
+										</div>
 										<div {{on "click" (fn this.removeFood food meal)}} class="close">x</div>
 									</li>
-									
-								</ul>
-							{{/each}}
-							<div class="meal-list-item-container">
-								<input type="text" id="food" {{on "change" this.update}}>
-								<button type="button" class="btn btn-primary" {{on "click" this.searchFood}}> Search </button>
+								{{/each}}
+							</ul>
+							<div class="submit-container">
+								<input type="text" class="text-input" id="food" {{on "change" this.update}}>
+								<button type="button" class="submit-button" {{on "click" this.searchFood}}> Search </button>
 							</div>
 						{{/if}}
 					{{/each}}
 				</ul>
+					<Dropdown
+						@mealList={{this.mealList}}
+						@mealSelected={{this.mealSelected}}
+						@closeLater={{this.closeLater}} />
 			</div>
 		</div>
 	</div>

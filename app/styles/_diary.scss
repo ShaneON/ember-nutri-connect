@@ -8,35 +8,41 @@
 
 .meal-list-item {
     cursor: pointer;
-    width: 50px;
-    min-height: 50px;
+    width: 90%;
+    min-height: 30px;
 }
 
 .close {
-    font-weight: 700;
-    margin-left: 60px;
-    cursor: pointer;
+  width: 5%;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .meal-list-item-container {
-    display: flex;
-    flex-direction: row;
-}
-
-.food-list-item {
-    display: flex;
-    flex-direction: row;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .diary-header {
-    font-size: 13px;
-    display: flex;
-    justify-content: center;
-    background-color: #bdbdbd;
-  }
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  background-color: #bdbdbd;
+}
 
-  .diary-content {
-    margin-left: 15px;
-    margin-left: 15px;
-    font-size: 12px;
-  }
+.diary-content {
+  font-size: 12px;
+}
+
+.meal-list-item-header {
+  font-weight: 800;
+  margin-left: 10px;
+  font-size: 13px;
+}
+
+.submit-container {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
