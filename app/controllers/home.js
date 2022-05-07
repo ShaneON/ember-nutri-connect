@@ -37,13 +37,14 @@ export default class HomeController extends Controller {
   }
 
   @action
-  mealSelected(event) {
+  mealSelected(dropdown, event) {
     const currentSection = this.meals.pushObject({
       name: event.target.innerText,
       foods: [],
     });
 
     this.currentSection = currentSection;
+    dropdown.actions.close();
   }
 
   @action

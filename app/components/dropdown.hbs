@@ -1,8 +1,8 @@
   <BasicDropdown as |dd|>
-    <dd.Trigger class='trigger-bootstrap-feel'>Add a meal <span class='caret'></span></dd.Trigger>
-    <dd.Content {{on 'mouseleave' (fn @closeLater dd)}} class='content-bootstrap-feel'>
+    <dd.Trigger class='trigger'>Add<span class='caret'></span></dd.Trigger>
+    <dd.Content {{on 'mouseleave' (fn @closeLater dd)}} class='content'>
       {{#each @mealList as |meal|}}
-          <p {{on "click" @mealSelected}}>{{meal}}</p>
+          <p {{on "click" (fn @mealSelected dd)}}>{{meal}}</p>
       {{/each}}
     </dd.Content>
   </BasicDropdown>

@@ -9,10 +9,11 @@ export default class HomeRoute extends Route {
     this.session.requireAuthentication(transition, 'login');
   }
 
-  model() {
+  async model() {
+    let user = await this.store.findRecord('user', this.session.data.authenticated.id);
     return {
-      user: this.store.findRecord('user', this.session.data.authenticated.id)
-    }
+      user: user
+    };
   }
 
   setupController(controller, model) {

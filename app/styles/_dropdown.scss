@@ -1,5 +1,6 @@
-.trigger-bootstrap-feel {
-    height: 40px;
+.trigger {
+    height: 30px;
+    width: 50px;
     display: inline-block;
     text-align: center;
     vertical-align: middle;
@@ -13,13 +14,13 @@
     outline: none;
   }
   
-  .trigger-bootstrap-feel:focus,
-  .trigger-bootstrap-feel:hover {
+  .trigger:focus,
+  .trigger:hover {
     background-color: #d4d4d4;
     border-color: #8c8c8c;
   }
   
-  .content-bootstrap-feel {
+  .content {
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 4px;
