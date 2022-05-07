@@ -1,5 +1,5 @@
 .nutrition-container {
-  background-color: #F3FBFF;
+  background-color: #FCFEFF;
   border: solid 1px #bdbdbd;
   border-radius: 3px;
   height: 400px;
@@ -8,6 +8,7 @@
 }
 
 .nutrition-header {
+  font-weight: 700;
   font-size: 13px;
   display: flex;
   justify-content: center;
@@ -19,15 +20,15 @@
 }
 
 .nutrition-list-item {
+  background-color: #F3FBFF;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-top: solid 1px #E6E6E6;
-  background-color: #F5F5F5;
+  border-top: solid 1px #D1E4FF;
   padding-left: 10px;
 
   &:last-child {
-    border-bottom: solid 1px #E6E6E6;
+    border-bottom: solid 1px #D1E4FF;
     margin-bottom: 10px;
   }
 }
