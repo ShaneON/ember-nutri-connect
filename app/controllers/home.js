@@ -55,10 +55,15 @@ export default class HomeController extends Controller {
   }
 
   @action
+  closeModal() {
+    this.isShowingModal = false;
+  }
+
+  @action
   async searchFood() {
     this.isShowingModal = true;
     const response = await fetch(
-      `https://us-en.openfoodfacts.org/api/v2/search?categories_tags_en=${this.food}&fields=product_name,energy_100g,proteins_100g,carbohydrates100g,fat_100g,fiber_100g,sodium_100g&json=true&page_size=24`
+      `https://us-en.openfoodfacts.org/api/v2/search?categories_tags_en=${this.food}&fields=product_name,energy_100g,proteins_100g,carbohydrates_100g,fat_100g,fiber_100g,sodium_100g&json=true&page_size=24`
     );
     const foods = await response.json();
     foods.products.forEach((product) => {
@@ -66,9 +71,7 @@ export default class HomeController extends Controller {
       product.kcal = product.energy_100g ? product.energy_100g : 0;
       product.protein = product.proteins_100g ? product.proteins_100g : 0;
       product.fat = product.fat_100g ? product.fat_100g : 0;
-      product.carbs = product.carbohydrates_100g
-        ? product.carbohydrates_100g
-        : 0;
+      product.carbs = product.carbohydrates_100g ? product.carbohydrates_100g : 0;
       product.sodium = product.sodium_100g ? product.sodium_100g : 0;
       product.fiber = product.fiber_100g ? product.fiber_100g : 0;
 
@@ -115,6 +118,8 @@ export default class HomeController extends Controller {
     this.serving = SERVING_DEFAULT;
 
     this.products = null;
+
+    this.meals = this.meals;
   }
 
   @action

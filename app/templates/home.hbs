@@ -1,62 +1,71 @@
 {{page-title "Home"}}
 
 <div class="home-container">
-	<h2 class="home-page-title">{{this.user.firstName}}'s Nutrition Page</h2>
+	<h2 class="home-title">{{this.user.firstName}}'s Nutrition Page</h2>
 	<div class="home-content">
 		<div class="user-info-container">
-			<ul>
-				<li>Daily Calories: {{this.user.kcalDaily}}</li>
-				<li>Current Weight: {{this.user.weight}}</li>
-			</ul>
+			<h3 class="user-info-header">{{this.user.firstName}}'s Stats</h3>
+			<div class="user-info-content">
+				<ul>
+					<li>Daily Calories: {{this.user.kcalDaily}}</li>
+					<li>Current Weight: {{this.user.weight}}</li>
+				</ul>
+			</div>
 		</div>
 		<div class="nutrition-container">
-			<ul>
-				<li>Calories: {{number-format this.kcalTotal}}</li>
-				<li>Protein: {{number-format this.proteinTotal}}</li>
-				<li>Fat: {{number-format this.fatTotal}}</li>
-				<li>Carbs: {{number-format this.carbsTotal}}</li>
-				<li>Sodium: {{number-format this.sodiumTotal}}</li>
-				<li>Fiber: {{number-format this.fiberTotal}}</li>
-			</ul>
+			<h3 class="nutrition-header">Nutrition Stats</h3>
+			<div class="nutrition-content">
+				<ul>
+					<li>Calories: {{number-format this.kcalTotal}} / {{this.user.kcalDaily}}</li>
+					<li>Protein: {{number-format this.proteinTotal}}</li>
+					<li>Fat: {{number-format this.fatTotal}}</li>
+					<li>Carbs: {{number-format this.carbsTotal}}</li>
+					<li>Sodium: {{number-format this.sodiumTotal}}</li>
+					<li>Fiber: {{number-format this.fiberTotal}}</li>
+				</ul>
+			</div>
 		</div>
 		<div class="diary-container">
-			<Dropdown
-				@mealList={{this.mealList}}
-				@mealSelected={{this.mealSelected}}
-				@closeLater={{this.closeLater}} />
-			<ul>
-				{{#each this.meals as |meal|}}
-					<div class="meal-list-item-container">
-						<li class="meal-list-item" {{on "click" (fn this.changeSection meal)}}>
-							<h5>{{meal.name}}</h5>
-						</li>
-						<div {{on "click" (fn this.removeSection meal)}} class="close">x</div>
-					</div>
-					{{#if (eq this.currentSection.name meal.name)}}
-						{{#each meal.foods as |food index|}}
-							<ul>
-								<li class="food-list-item">
-									{{food.name}}
-									{{food.serving}}
-									{{food.kcal}}
-									<div {{on "click" (fn this.removeFood food meal)}} class="close">x</div>
-								</li>
-								
-							</ul>
-						{{/each}}
+			<h3 class="diary-header">Meal Planner</h3>
+			<div class="diary-content">
+				<Dropdown
+					@mealList={{this.mealList}}
+					@mealSelected={{this.mealSelected}}
+					@closeLater={{this.closeLater}} />
+				<ul>
+					{{#each this.meals as |meal|}}
 						<div class="meal-list-item-container">
-							<input type="text" id="food" {{on "change" this.update}}>
-							<button type="button" class="btn btn-primary" {{on "click" this.searchFood}}> Search </button>
+							<li class="meal-list-item" {{on "click" (fn this.changeSection meal)}}>
+								<h5>{{meal.name}}</h5>
+							</li>
+							<div {{on "click" (fn this.removeSection meal)}} class="close">x</div>
 						</div>
-					{{/if}}
-				{{/each}}
-			</ul>
+						{{#if (eq this.currentSection.name meal.name)}}
+							{{#each meal.foods as |food index|}}
+								<ul>
+									<li class="food-list-item">
+										{{food.name}}
+										{{food.serving}}
+										{{food.kcal}}
+										<div {{on "click" (fn this.removeFood food meal)}} class="close">x</div>
+									</li>
+									
+								</ul>
+							{{/each}}
+							<div class="meal-list-item-container">
+								<input type="text" id="food" {{on "change" this.update}}>
+								<button type="button" class="btn btn-primary" {{on "click" this.searchFood}}> Search </button>
+							</div>
+						{{/if}}
+					{{/each}}
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
 
 {{#if this.isShowingModal}}
-	<ModalDialog>
+	<ModalDialog @onClickOverlay={{this.closeModal}}>
 		<div class="product-list-container">
 			<div class="product-list-header">
 				<h6>Name</h6>
