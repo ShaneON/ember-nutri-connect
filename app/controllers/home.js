@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { later } from '@ember/runloop';
 
-const MEALSLIST = ['Breakfast', 'Lunch', 'Dinner', 'Snack', 'Brunch', 'Supper'];
+const MEALLIST = ['Breakfast', 'Lunch', 'Dinner', 'Snack', 'Brunch', 'Supper'];
 
 export default class HomeController extends Controller {
   @service router;
@@ -12,16 +12,15 @@ export default class HomeController extends Controller {
   @service store;
 
   @tracked currentSection;
-  @tracked meals = [];
+  // @tracked meals = [];
   @tracked kcalTotal = 0;
   @tracked proteinTotal = 0;
   @tracked carbsTotal = 0;
   @tracked fatTotal = 0;
   @tracked sodiumTotal = 0;
   @tracked fiberTotal = 0;
-  @tracked isShowingModal = false;
 
-  mealList = MEALSLIST;
+  mealList = MEALLIST;
   food;
 
   @action
@@ -36,7 +35,7 @@ export default class HomeController extends Controller {
 
   @action
   mealSelected(dropdown, event) {
-    const currentSection = this.meals.pushObject({
+    const currentSection = this.diary.pushObject({
       name: event.target.innerText,
       foods: [],
     });
@@ -73,12 +72,30 @@ export default class HomeController extends Controller {
     const mealProtein = meal.foods.reduce((previous, current) => {
       return previous + current.protein;
     }, 0);
+    const mealFat = meal.foods.reduce((previous, current) => {
+      return previous + current.fat;
+    }, 0);
+    const mealSodium = meal.foods.reduce((previous, current) => {
+      return previous + current.sodium;
+    }, 0);
+    const mealCarbs = meal.foods.reduce((previous, current) => {
+      return previous + current.carbs;
+    }, 0);
+    const mealFiber = meal.foods.reduce((previous, current) => {
+      return previous + current.fiber;
+    }, 0);
+
     this.kcalTotal -= mealKcals;
     this.proteinTotal -= mealProtein;
-    const index = this.meals.indexOf(meal);
-    this.meals.removeObject(meal);
-    if (meal === this.currentSection && this.meals.length)
-      this.currentSection = this.meals[index - 1];
+    this.fatTotal -= mealFat;
+    this.carbsTotal -= mealCarbs;
+    this.fiberTotal -= mealFiber;
+    this.sodiumTotal -= mealSodium;
+
+    const index = this.diary.indexOf(meal);
+    this.diary.removeObject(meal);
+    if (meal === this.currentSection && this.diary.length)
+      this.currentSection = this.diary[index - 1];
   }
 
   @action

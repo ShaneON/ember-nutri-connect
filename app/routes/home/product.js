@@ -14,6 +14,9 @@ export default class HomeProductRoute extends Route {
 
   setupController(controller, model) {
     controller.foods = model;
-    controller.user = this.modelFor('home');
+    let { user } = this.modelFor('home');
+    let { diary } = this.modelFor('home');
+    controller.user = user;
+    controller.diary = diary;
   }
 }

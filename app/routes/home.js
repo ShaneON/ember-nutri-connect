@@ -23,6 +23,8 @@ export default class HomeRoute extends Route {
   setupController(controller, model) {
     super.setupController(...arguments);
     let { user } = model;
+    let { diary } = model;
     controller.user = user;
+    controller.diary = diary;
   }
 }
