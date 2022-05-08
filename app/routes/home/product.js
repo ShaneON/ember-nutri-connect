@@ -1,0 +1,22 @@
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default class HomeProductRoute extends Route {
+  @service store;
+
+  model(params) {
+    return this.store.query('product', {
+      id: params.id
+    }).then((data) => {
+      return data.toArray();
+    });
+  }
+
+  setupController(controller, model) {
+    controller.foods = model;
+    let { user } = this.modelFor('home');
+    let { diary } = this.modelFor('home');
+    controller.user = user;
+    controller.diary = diary;
+  }
+}
