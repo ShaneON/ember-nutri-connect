@@ -12,7 +12,6 @@ export default class HomeController extends Controller {
   @service store;
 
   @tracked currentSection;
-  // @tracked meals = [];
   @tracked kcalTotal = 0;
   @tracked proteinTotal = 0;
   @tracked carbsTotal = 0;
