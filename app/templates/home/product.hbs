@@ -1,3 +1,5 @@
 <ModalDialog @onClickOverlay={{this.closeModal}}>
-  {{this.food}}
+  {{#each this.foods as |food|}}
+    {{food.name}}
+  {{/each}}
 </ModalDialog>
