@@ -16,11 +16,11 @@ export default class HomeRoute extends Route {
     );
     return {
       user: user,
+      diary: []
     };
   }
 
   setupController(controller, model) {
-    console.log(model);
     super.setupController(...arguments);
     let { user } = model;
     controller.user = user;
