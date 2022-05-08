@@ -66,7 +66,7 @@ export default class HomeController extends Controller {
   async searchFood() {
     let food = this.food.replace(' ', '-');
     this.router.transitionTo('home.product', food);
-    
+
     // this.isShowingModal = true;
     // const response = await fetch(
     //   `https://us-en.openfoodfacts.org/api/v2/search?categories_tags_en=${this.food}&fields=product_name,energy_100g,proteins_100g,carbohydrates_100g,fat_100g,fiber_100g,sodium_100g&json=true&page_size=24`
