@@ -8,6 +8,7 @@ const SERVING_DEFAULT = 100;
 const MEALSLIST = ['Breakfast', 'Lunch', 'Dinner', 'Snack', 'Brunch', 'Supper'];
 
 export default class HomeController extends Controller {
+  @service router;
   @service session;
   @service store;
 
@@ -63,33 +64,36 @@ export default class HomeController extends Controller {
 
   @action
   async searchFood() {
-    this.isShowingModal = true;
-    const response = await fetch(
-      `https://us-en.openfoodfacts.org/api/v2/search?categories_tags_en=${this.food}&fields=product_name,energy_100g,proteins_100g,carbohydrates_100g,fat_100g,fiber_100g,sodium_100g&json=true&page_size=24`
-    );
-    const foods = await response.json();
-    foods.products.forEach((product) => {
-      product.name = product.product_name ? product.product_name : 0;
-      product.kcal = product.energy_100g ? product.energy_100g : 0;
-      product.protein = product.proteins_100g ? product.proteins_100g : 0;
-      product.fat = product.fat_100g ? product.fat_100g : 0;
-      product.carbs = product.carbohydrates_100g
-        ? product.carbohydrates_100g
-        : 0;
-      product.sodium = product.sodium_100g ? product.sodium_100g : 0;
-      product.fiber = product.fiber_100g ? product.fiber_100g : 0;
+    let food = this.food.replace(' ', '-');
+    this.router.transitionTo('home.product', food);
+    
+    // this.isShowingModal = true;
+    // const response = await fetch(
+    //   `https://us-en.openfoodfacts.org/api/v2/search?categories_tags_en=${this.food}&fields=product_name,energy_100g,proteins_100g,carbohydrates_100g,fat_100g,fiber_100g,sodium_100g&json=true&page_size=24`
+    // );
+    // const foods = await response.json();
+    // foods.products.forEach((product) => {
+    //   product.name = product.product_name ? product.product_name : 0;
+    //   product.kcal = product.energy_100g ? product.energy_100g : 0;
+    //   product.protein = product.proteins_100g ? product.proteins_100g : 0;
+    //   product.fat = product.fat_100g ? product.fat_100g : 0;
+    //   product.carbs = product.carbohydrates_100g
+    //     ? product.carbohydrates_100g
+    //     : 0;
+    //   product.sodium = product.sodium_100g ? product.sodium_100g : 0;
+    //   product.fiber = product.fiber_100g ? product.fiber_100g : 0;
 
-      delete product.energy_100g;
-      delete product.product_name;
-      delete product.proteins_100g;
-      delete product.fat_100g;
-      delete product.carbohydrates_100g;
-      delete product.sodium_100g;
-      delete product.fiber_100g;
+    //   delete product.energy_100g;
+    //   delete product.product_name;
+    //   delete product.proteins_100g;
+    //   delete product.fat_100g;
+    //   delete product.carbohydrates_100g;
+    //   delete product.sodium_100g;
+    //   delete product.fiber_100g;
 
-      product.kcal = parseInt(product.kcal / 4.814);
-    });
-    this.products = foods.products;
+    //   product.kcal = parseInt(product.kcal / 4.814);
+    // });
+    // this.products = foods.products;
   }
 
   @action
