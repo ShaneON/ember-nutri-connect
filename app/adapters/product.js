@@ -1,7 +1,7 @@
 import RESTAdapter from '@ember-data/adapter/rest';
 
 export default class ProductAdapter extends RESTAdapter {
-  host = 'https://us-en.openfoodfacts.org';
+  host = 'https://uk-en.openfoodfacts.org';
   namespace = 'api/v2';
 
   urlForQuery(query) {
