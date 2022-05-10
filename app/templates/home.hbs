@@ -1,7 +1,6 @@
 {{page-title "Home"}}
 
 <div class="home-container">
-	<h2 class="home-title">{{this.user.firstName}}'s Nutrition Page</h2>
 	<div class="home-content">
 		<div class="user-info-container">
 			<div class="user-info-header">
@@ -24,12 +23,12 @@
 			</div>
 			<div class="nutrition-content">
 				<ul>
-					<li class="nutrition-list-item">Calories: {{number-format this.kcalTotal}} / {{this.user.kcalDaily}}</li>
-					<li class="nutrition-list-item">Protein: {{number-format this.proteinTotal}}</li>
-					<li class="nutrition-list-item">Fat: {{number-format this.fatTotal}}</li>
-					<li class="nutrition-list-item">Carbs: {{number-format this.carbsTotal}}</li>
-					<li class="nutrition-list-item">Sodium: {{number-format this.sodiumTotal}}</li>
-					<li class="nutrition-list-item">Fiber: {{number-format this.fiberTotal}}</li>
+					<li class="nutrition-list-item">Calories: {{number-format this.totalKcal}} / {{this.user.kcalDaily}}</li>
+					<li class="nutrition-list-item">Protein: {{number-format this.totalProtein}}</li>
+					<li class="nutrition-list-item">Fat: {{number-format this.totalFat}}</li>
+					<li class="nutrition-list-item">Carbs: {{number-format this.totalCarbs}}</li>
+					<li class="nutrition-list-item">Sodium: {{number-format this.totalSodium}}</li>
+					<li class="nutrition-list-item">Fiber: {{number-format this.totalFiber}}</li>
 				</ul>
 			</div>
 		</div>
@@ -41,91 +40,77 @@
 			</div>
 			<div class="diary-content">
 				<ul>
-					{{#if this.breakfast}}
-						<DiaryItem
-							@name="Breakfast"
-							@meal={{this.breakfast}}
-							@searchFood={{this.searchFood}}
-							@update={{this.update}}
-							/>
-					{{/if}}
-					{{#if this.snack1}}
-						<DiaryItem
-							@name="Snack 1"
-							@meal={{this.snack1}}
-							@searchFood={{this.searchFood}}
-							@update={{this.update}}
-							/>
-					{{/if}}
-					{{#if this.brunch}}
-						<DiaryItem
-							@name="Brunch"
-							@meal={{this.brunch}}
-							@searchFood={{this.searchFood}}
-							@update={{this.update}}
-							/>
-					{{/if}}
-					{{#if this.snack2}}
-						<DiaryItem
-							@name="Snack 2"
-							@meal={{this.snack2}}
-							@searchFood={{this.searchFood}}
-							@update={{this.update}}
-							/>
-					{{/if}}
-					{{#if this.lunch}}
-						<DiaryItem
-							@name="Lunch"
-							@meal={{this.lunch}}
-							@searchFood={{this.searchFood}}
-							@update={{this.update}}
-							/>
-					{{/if}}
-					{{#if this.snack3}}
-						<DiaryItem
-							@name="Snack 3"
-							@meal={{this.snack3}}
-							@searchFood={{this.searchFood}}
-							@update={{this.update}}
-							/>
-					{{/if}}
-					{{#if this.dinner}}
-						<DiaryItem
-							@name="Dinner"
-							@meal={{this.dinner}}
-							@searchFood={{this.searchFood}}
-							@update={{this.update}}
-							/>
-					{{/if}}
-					{{#if this.snack4}}
-						<DiaryItem
-							@name="Snack 4"
-							@meal={{this.snack4}}
-							@searchFood={{this.searchFood}}
-							@update={{this.update}}
-							/>
-					{{/if}}
-					{{#if this.supper}}
-						<DiaryItem
-							@name="Supper"
-							@meal={{this.supper}}
-							@searchFood={{this.searchFood}}
-							@update={{this.update}}
-							/>
-					{{/if}}
-					{{#if this.snack5}}
-						<DiaryItem
-							@name="Snack 5"
-							@meal={{this.snack5}}
-							@searchFood={{this.searchFood}}
-							@update={{this.update}}
-							/>
-					{{/if}}
+					<DiaryItem
+						@name="Breakfast"
+						@meal={{this.breakfast}}
+						@searchFood={{this.searchFood}}
+						@update={{this.update}}
+						@removeFood={{this.removeFood}}
+						/>
+					<DiaryItem
+						@name="Snack 1"
+						@meal={{this.snack1}}
+						@searchFood={{this.searchFood}}
+						@update={{this.update}}
+						@removeFood={{this.removeFood}}
+						/>
+					<DiaryItem
+						@name="Brunch"
+						@meal={{this.brunch}}
+						@searchFood={{this.searchFood}}
+						@update={{this.update}}
+						@removeFood={{this.removeFood}}
+						/>
+					<DiaryItem
+						@name="Snack 2"
+						@meal={{this.snack2}}
+						@searchFood={{this.searchFood}}
+						@update={{this.update}}
+						@removeFood={{this.removeFood}}
+						/>
+					<DiaryItem
+						@name="Lunch"
+						@meal={{this.lunch}}
+						@searchFood={{this.searchFood}}
+						@update={{this.update}}
+						@removeFood={{this.removeFood}}
+						/>
+					<DiaryItem
+						@name="Snack 3"
+						@meal={{this.snack3}}
+						@searchFood={{this.searchFood}}
+						@update={{this.update}}
+						@removeFood={{this.removeFood}}
+						/>
+					<DiaryItem
+						@name="Dinner"
+						@meal={{this.dinner}}
+						@searchFood={{this.searchFood}}
+						@update={{this.update}}
+						@removeFood={{this.removeFood}}
+						/>
+					<DiaryItem
+						@name="Snack 4"
+						@meal={{this.snack4}}
+						@searchFood={{this.searchFood}}
+						@update={{this.update}}
+						@removeFood={{this.removeFood}}
+						/>
+					<DiaryItem
+						@name="Supper"
+						@meal={{this.supper}}
+						@searchFood={{this.searchFood}}
+						@update={{this.update}}
+						@removeFood={{this.removeFood}}
+						/>
+					<DiaryItem
+						@name="Snack 5"
+						@meal={{this.snack5}}
+						@searchFood={{this.searchFood}}
+						@update={{this.update}}
+						@removeFood={{this.removeFood}}
+						/>
 				</ul>
-				<Dropdown
-					@mealList={{this.mealList}}
-					@mealSelected={{this.mealSelected}}
-					@closeLater={{this.closeLater}} />
 			</div>
 		</div>
 	</div>

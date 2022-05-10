@@ -11,6 +11,10 @@
 @import "ember-modal-dialog/ember-modal-structure";
 @import "ember-modal-dialog/ember-modal-appearance";
 
+html, body{
+  margin:0;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
