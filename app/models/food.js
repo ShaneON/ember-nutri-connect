@@ -1,8 +1,8 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
 
 export default class FoodModel extends Model {
-  @belongsTo('user') userId;
 
+  @attr('string') userId;
   @attr('String') name;
   @attr('String') meal;
   @attr('String') dayOfYear;

@@ -45,9 +45,9 @@ export default class HomeProductController extends Controller {
       })
       .replaceAll('/', '');
 
-    this.foods.pushObject({
-      name: food.name,
+    const saveFood = this.store.createRecord('food', {
       userId: this.user.id,
+      name: food.name,
       kcal: food.kcal,
       protein: food.protein,
       fat: food.fat,
@@ -57,7 +57,9 @@ export default class HomeProductController extends Controller {
       serving: food.serving,
       meal: this.home.currentMeal,
       dayOfYear: dateToday
-    });
+    }).save();
+
+    this.foods.pushObject(saveFood);
     this.router.transitionTo('home');
   }
 

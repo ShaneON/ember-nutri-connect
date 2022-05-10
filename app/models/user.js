@@ -1,7 +1,7 @@
 import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class UserModel extends Model {
-  @hasMany('diary') diaries;
+  @hasMany('food') foods;
 
   @attr('string') firstName;
   @attr('string') lastName;
