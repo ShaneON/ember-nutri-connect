@@ -7,6 +7,7 @@ const SERVING_DEFAULT = 100;
 
 export default class HomeProductController extends Controller {
   @service router;
+  @service store;
   @controller home;
 
   serving = SERVING_DEFAULT;
@@ -18,7 +19,6 @@ export default class HomeProductController extends Controller {
 
   @action
   addFood(food) {
-
     let serving = parseFloat(this.serving) / 100.0;
     food.kcal = serving * food.kcal;
     food.protein = serving * food.protein;
@@ -37,7 +37,27 @@ export default class HomeProductController extends Controller {
     this.home.fiberTotal += food.fiber;
     this.serving = SERVING_DEFAULT;
 
-    this.home.currentSection.foods.pushObject(food);
+    const dateToday = new Date()
+      .toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      })
+      .replaceAll('/', '');
+
+    this.foods.pushObject({
+      name: food.name,
+      userId: this.user.id,
+      kcal: food.kcal,
+      protein: food.protein,
+      fat: food.fat,
+      carbs: food.carbs,
+      sodium: food.sodium,
+      fiber: food.fiber,
+      serving: food.serving,
+      meal: this.home.currentMeal,
+      dayOfYear: dateToday
+    });
     this.router.transitionTo('home');
   }
 

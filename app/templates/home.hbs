@@ -1,5 +1,8 @@
 {{page-title "Home"}}
 
+{{log this.breakfast}}
+{{log this.snack1}}
+
 <div class="home-container">
 	<h2 class="home-title">{{this.user.firstName}}'s Nutrition Page</h2>
 	<div class="home-content">
@@ -41,46 +44,91 @@
 			</div>
 			<div class="diary-content">
 				<ul>
-					{{#each this.diary as |meal|}}
-						<div class="meal-list-item-container">
-							<li class="meal-list-item" {{on "click" (fn this.changeSection meal)}}>
-								<h5 class="meal-list-item-header">{{meal.name}}</h5>
-							</li>
-							<div {{on "click" (fn this.removeSection meal)}} class="close">x</div>
-						</div>
-						{{#if (eq this.currentSection.name meal.name)}}
-							<ul>
-								<div class="diary-list-item-header-container">
-									<div class="diary-list-item-item">Name</div>
-									<div class="diary-list-item-item">Serving</div>
-									<div class="diary-list-item-item">Calories</div>
-								</div>
-								{{#each meal.foods as |food index|}}
-									<li class="diary-list-item">
-										<div class="diary-list-item-content">
-											<div class="diary-list-item-item">{{food.name}}</div>
-											<div class="diary-list-item-item">{{food.serving}}g</div>
-											<div class="diary-list-item-item">{{food.kcal}}</div>
-										</div>
-										<div {{on "click" (fn this.removeFood food meal)}} class="close">x</div>
-									</li>
-								{{/each}}
-							</ul>
-							<div class="submit-container">
-								<input type="text" class="generic-input" id="food" {{on "change" this.update}}>
-								<button type="button" class="generic-button" {{on "click" this.searchFood}}>
-									<div>
-										Search
-									</div> 
-								</button>
-							</div>
-						{{/if}}
-					{{/each}}
+					{{#if this.breakfast}}
+						<DiaryItem
+							@name="Breakfast"
+							@meal={{this.breakfast}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							/>
+					{{/if}}
+					{{#if this.snack1}}
+						<DiaryItem
+							@name="Snack 1"
+							@meal={{this.snack1}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							/>
+					{{/if}}
+					{{#if this.brunch}}
+						<DiaryItem
+							@name="Brunch"
+							@meal={{this.brunch}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							/>
+					{{/if}}
+					{{#if this.snack2}}
+						<DiaryItem
+							@name="Snack 2"
+							@meal={{this.snack2}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							/>
+					{{/if}}
+					{{#if this.lunch}}
+						<DiaryItem
+							@name="Lunch"
+							@meal={{this.lunch}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							/>
+					{{/if}}
+					{{#if this.snack3}}
+						<DiaryItem
+							@name="Snack 3"
+							@meal={{this.snack3}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							/>
+					{{/if}}
+					{{#if this.dinner}}
+						<DiaryItem
+							@name="Dinner"
+							@meal={{this.dinner}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							/>
+					{{/if}}
+					{{#if this.snack4}}
+						<DiaryItem
+							@name="Snack 4"
+							@meal={{this.snack4}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							/>
+					{{/if}}
+					{{#if this.supper}}
+						<DiaryItem
+							@name="Supper"
+							@meal={{this.supper}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							/>
+					{{/if}}
+					{{#if this.snack5}}
+						<DiaryItem
+							@name="Snack 5"
+							@meal={{this.snack5}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							/>
+					{{/if}}
 				</ul>
-					<Dropdown
-						@mealList={{this.mealList}}
-						@mealSelected={{this.mealSelected}}
-						@closeLater={{this.closeLater}} />
+				<Dropdown
+					@mealList={{this.mealList}}
+					@mealSelected={{this.mealSelected}}
+					@closeLater={{this.closeLater}} />
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default class HomeRoute extends Route {
   @service session;
@@ -14,17 +15,28 @@ export default class HomeRoute extends Route {
       'user',
       this.session.data.authenticated.id
     );
+    const dateToday = new Date()
+      .toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      })
+      .replaceAll('/', '');
+    let foods = await this.store.query('food', {
+      userId: user.id,
+      dayOfYear: dateToday
+    });
     return {
       user: user,
-      diary: []
+      foods: foods.toArray(),
     };
   }
 
   setupController(controller, model) {
     super.setupController(...arguments);
     let { user } = model;
-    let { diary } = model;
+    let { foods } = model;
     controller.user = user;
-    controller.diary = diary;
+    controller.foods = foods;
   }
 }
