@@ -5,18 +5,20 @@ export default class HomeProductRoute extends Route {
   @service store;
 
   model(params) {
-    return this.store.query('product', {
-      id: params.id
-    }).then((data) => {
-      return data.toArray();
-    });
+    return this.store
+      .query('product', {
+        id: params.id,
+      })
+      .then((data) => {
+        return data.toArray();
+      });
   }
 
   setupController(controller, model) {
-    controller.foods = model;
+    controller.products = model;
     let { user } = this.modelFor('home');
-    let { diary } = this.modelFor('home');
+    let { foods } = this.modelFor('home');
     controller.user = user;
-    controller.diary = diary;
+    controller.foods = foods;
   }
 }

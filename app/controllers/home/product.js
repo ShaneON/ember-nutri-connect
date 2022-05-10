@@ -7,6 +7,7 @@ const SERVING_DEFAULT = 100;
 
 export default class HomeProductController extends Controller {
   @service router;
+  @service store;
   @controller home;
 
   serving = SERVING_DEFAULT;
@@ -17,8 +18,7 @@ export default class HomeProductController extends Controller {
   }
 
   @action
-  addFood(food) {
-
+  async addFood(food) {
     let serving = parseFloat(this.serving) / 100.0;
     food.kcal = serving * food.kcal;
     food.protein = serving * food.protein;
@@ -28,16 +28,35 @@ export default class HomeProductController extends Controller {
     food.fiber = serving * food.fiber;
 
     food.serving = this.serving;
-
-    this.home.kcalTotal += food.kcal;
-    this.home.proteinTotal += food.protein;
-    this.home.fatTotal += food.fat;
-    this.home.carbsTotal += food.carbs;
-    this.home.sodiumTotal += food.sodium;
-    this.home.fiberTotal += food.fiber;
     this.serving = SERVING_DEFAULT;
 
-    this.home.currentSection.foods.pushObject(food);
+    const dateToday = new Date()
+      .toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      })
+      .replaceAll('/', '');
+
+    let saveFood = this.store.createRecord('food', {
+      userId: this.user.id,
+      name: food.name,
+      kcal: food.kcal,
+      protein: food.protein,
+      fat: food.fat,
+      carbs: food.carbs,
+      sodium: food.sodium,
+      fiber: food.fiber,
+      serving: food.serving,
+      meal: this.home.currentMeal,
+      dayOfYear: dateToday
+    });
+
+    saveFood = await saveFood.save();
+
+    console.log(saveFood)
+
+    this.foods.pushObject(saveFood);
     this.router.transitionTo('home');
   }
 

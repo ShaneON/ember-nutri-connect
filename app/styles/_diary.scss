@@ -2,9 +2,17 @@
   background-color: #FFFFFC;
   border: solid 1px #bdbdbd;
   border-radius: 5px;
-  height: 400px;
+  height: 100%;
   width: 500px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  overflow: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.diary-container::-webkit-scrollbar {
+  display: none;
 }
 
 .meal-list-item {
@@ -84,7 +92,6 @@
 }
 
 .diary-list-item-item {
-
   width: 20%;
 
   &:first-child {

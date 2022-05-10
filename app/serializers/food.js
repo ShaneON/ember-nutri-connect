@@ -17,7 +17,6 @@ export default class FoodSerializer extends RESTSerializer {
   normalizeSingleResponse(store, primaryModelClass, payload, id, requestType) {
     payload.foods.id = payload.foods._id;
     delete payload.foods._id;
-    console.log(payload);
     return super.normalizeSingleResponse(
       store,
       primaryModelClass,
@@ -32,6 +31,7 @@ export default class FoodSerializer extends RESTSerializer {
       item.id = item._id;
       delete item._id;
     });
+
     return super.normalizeArrayResponse(
       store,
       primaryModelClass,

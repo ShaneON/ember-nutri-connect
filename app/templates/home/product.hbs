@@ -6,7 +6,7 @@
       <h6>Kcal</h6>
     </div>
     <ul class="product-list">
-      {{#each this.foods as |food|}}
+      {{#each this.products as |food|}}
         {{#if (and food.name food.kcal)}}
           <li class="product-list-item">
             <h3 class="product-name" {{on "click" (fn this.addFood food)}}>{{food.name}}</h3>

@@ -1,8 +1,9 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
 import { later } from '@ember/runloop';
+import { filterBy } from '@ember/object/computed';
+import { tracked } from '@glimmer/tracking';
 
 const MEALLIST = ['Breakfast', 'Lunch', 'Dinner', 'Snack', 'Brunch', 'Supper'];
 
@@ -11,16 +12,58 @@ export default class HomeController extends Controller {
   @service session;
   @service store;
 
-  @tracked currentSection;
-  @tracked kcalTotal = 0;
-  @tracked proteinTotal = 0;
-  @tracked carbsTotal = 0;
-  @tracked fatTotal = 0;
-  @tracked sodiumTotal = 0;
-  @tracked fiberTotal = 0;
+  @tracked foods;
 
-  mealList = MEALLIST;
+  @filterBy('foods', 'meal', 'Breakfast') breakfast;
+  @filterBy('foods', 'meal', 'Brunch') brunch;
+  @filterBy('foods', 'meal', 'Lunch') lunch;
+  @filterBy('foods', 'meal', 'Dinner') dinner;
+  @filterBy('foods', 'meal', 'Supper') supper;
+  @filterBy('foods', 'meal', 'Snack 1') snack1;
+  @filterBy('foods', 'meal', 'Snack 2') snack2;
+  @filterBy('foods', 'meal', 'Snack 3') snack3;
+  @filterBy('foods', 'meal', 'Snack 4') snack4;
+  @filterBy('foods', 'meal', 'Snack 5') snack5;
+
+  get totalKcal() {
+    return this.foods.reduce((previous, current) => {
+      return previous + current.get('kcal');
+    }, 0);
+  }
+
+  get totalProtein() {
+    return this.foods.reduce((previous, current) => {
+      return previous + current.get('protein');
+    }, 0);
+  }
+
+  get totalFat() {
+    return this.foods.reduce((previous, current) => {
+      return previous + current.get('fat');
+    }, 0);
+  }
+
+  get totalCarbs() {
+    return this.foods.reduce((previous, current) => {
+      return previous + current.get('carbs');
+    }, 0);
+  }
+
+  get totalSodium() {
+    return this.foods.reduce((previous, current) => {
+      return previous + current.get('sodium');
+    }, 0);
+  }
+
+  get totalFiber() {
+    return this.foods.reduce((previous, current) => {
+      return previous + current.get('fiber');
+    }, 0);
+  }
+  
   food;
+  currentMeal;
+  mealList = MEALLIST;
 
   @action
   update(event) {
@@ -28,18 +71,13 @@ export default class HomeController extends Controller {
   }
 
   @action
-  changeSection(section) {
-    this.currentSection = section;
-  }
-
-  @action
   mealSelected(dropdown, event) {
-    const currentSection = this.diary.pushObject({
-      name: event.target.innerText,
-      foods: [],
-    });
-
-    this.currentSection = currentSection;
+    let nextSnackNum = this.snack.length + 1;
+    let meal = event.target.innerText;
+    if (meal === 'Snack') {
+      meal = `${meal} ${nextSnackNum}`;
+    }
+    this.currentMeal = meal;
     dropdown.actions.close();
   }
 
@@ -58,53 +96,18 @@ export default class HomeController extends Controller {
   }
 
   @action
-  async searchFood() {
+  async searchFood(name) {
+    this.currentMeal = name;
     let food = this.food.replace(' ', '-');
     this.router.transitionTo('home.product', food);
   }
 
   @action
-  removeSection(meal) {
-    const mealKcals = meal.foods.reduce((previous, current) => {
-      return previous + current.kcal;
-    }, 0);
-    const mealProtein = meal.foods.reduce((previous, current) => {
-      return previous + current.protein;
-    }, 0);
-    const mealFat = meal.foods.reduce((previous, current) => {
-      return previous + current.fat;
-    }, 0);
-    const mealSodium = meal.foods.reduce((previous, current) => {
-      return previous + current.sodium;
-    }, 0);
-    const mealCarbs = meal.foods.reduce((previous, current) => {
-      return previous + current.carbs;
-    }, 0);
-    const mealFiber = meal.foods.reduce((previous, current) => {
-      return previous + current.fiber;
-    }, 0);
-
-    this.kcalTotal -= mealKcals;
-    this.proteinTotal -= mealProtein;
-    this.fatTotal -= mealFat;
-    this.carbsTotal -= mealCarbs;
-    this.fiberTotal -= mealFiber;
-    this.sodiumTotal -= mealSodium;
-
-    const index = this.diary.indexOf(meal);
-    this.diary.removeObject(meal);
-    if (meal === this.currentSection && this.diary.length)
-      this.currentSection = this.diary[index - 1];
-  }
-
-  @action
-  removeFood(food, meal) {
-    this.kcalTotal -= food.kcal;
-    this.proteinTotal -= food.protein;
-    this.fatTotal -= food.fat;
-    this.carbsTotal -= food.carbs;
-    this.sodiumTotal -= food.sodium;
-    this.fiberTotal -= food.fiber;
-    meal.foods.removeObject(food);
+  async removeFood(food, meal) {
+    const foodToDelete = await this.store.peekRecord('food', food.id);
+    console.log(foodToDelete)
+    foodToDelete.destroyRecord();
+    this.foods.removeObject(food);
+    this.foods = this.foods;
   }
 }
