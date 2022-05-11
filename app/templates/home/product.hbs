@@ -7,13 +7,13 @@
     </div>
     <ul class="product-list">
       {{#each this.products as |food|}}
-        {{#if (and food.name food.kcal)}}
+        {{!-- {{#if (and food.name food.kcal)}} --}}
           <li class="product-list-item">
             <h3 class="product-name" {{on "click" (fn this.addFood food)}}>{{food.name}}</h3>
-            <div class="input-container"><input class="product-list-input" type="number" id="serving" value="100" {{on "change" this.update}}> <p>grams</p></div>
+            <div class="input-container"><input class="product-list-input" type="number" id="serving" value="100" {{on "input" (fn this.update food)}}> <p>grams</p></div>
             <p>{{food.kcal}} kcal</p>
           </li>
-        {{/if}}
+        {{!-- {{/if}} --}}
       {{/each}}
     </ul>
   </div>

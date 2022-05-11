@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { inject as controller } from '@ember/controller';
+import { tracked } from '@glimmer/tracking';
 
 const SERVING_DEFAULT = 100;
 
@@ -10,25 +11,38 @@ export default class HomeProductController extends Controller {
   @service store;
   @controller home;
 
-  serving = SERVING_DEFAULT;
+  defaultServing = SERVING_DEFAULT;
+  @tracked products;
 
   @action
-  update(event) {
+  update(food, event) {
+    if (food.serving)
+      food.kcal = parseInt(food.kcal / (food.serving / 100));
+  
     this[event.target.id] = event.target.value;
+    let serving = parseFloat(this[event.target.id]) / 100.0;
+    
+    if (serving > 0)
+      food.kcal = parseInt(food.kcal * serving);
+  
+    food.serving = serving * 100; 
   }
 
   @action
   async addFood(food) {
-    let serving = parseFloat(this.serving) / 100.0;
-    food.kcal = serving * food.kcal;
-    food.protein = serving * food.protein;
-    food.fat = serving * food.fat;
-    food.carbs = serving * food.carbs;
-    food.sodium = serving * food.sodium;
-    food.fiber = serving * food.fiber;
+    let servingTimes;
+    if (food.serving)
+      servingTimes = parseFloat(food.serving) / 100.0;
+    else
+      servingTimes = parseFloat(this.defaultServing) / 100.0;
 
-    food.serving = this.serving;
-    this.serving = SERVING_DEFAULT;
+    food.protein = servingTimes * food.protein;
+    food.fat = servingTimes * food.fat;
+    food.carbs = servingTimes * food.carbs;
+    food.sodium = servingTimes * food.sodium;
+    food.fiber = servingTimes * food.fiber;
+
+    food.serving = servingTimes * 100;
 
     const dateToday = new Date()
       .toLocaleDateString('en-GB', {
@@ -53,8 +67,6 @@ export default class HomeProductController extends Controller {
     });
 
     saveFood = await saveFood.save();
-
-    console.log(saveFood)
 
     this.foods.pushObject(saveFood);
     this.router.transitionTo('home');
