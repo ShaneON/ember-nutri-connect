@@ -11,6 +11,15 @@
         <div class="diary-list-item-item">{{food.serving}}g</div>
         <div class="diary-list-item-item">{{food.kcal}}kcal</div>
       </div>
+      <div {{on "click" (fn @removeFood food @meal)}} class="close">x</div>
     </li>
   {{/each}}
+    <div class="submit-container">
+      <input type="text" class="generic-input" id="food" {{on "change" @update}}>
+      <button type="button" class="generic-button" {{on "click" (fn @searchFood @name)}}>
+        <div>
+          Search
+        </div> 
+      </button>
+    </div>
 </ul>

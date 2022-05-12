@@ -60,10 +60,11 @@ export default class HomeController extends Controller {
       return previous + current.get('fiber');
     }, 0);
   }
-  
+
   food;
   currentMeal;
   mealList = MEALLIST;
+  @tracked isEditing = true;
 
   @action
   update(event) {
@@ -105,7 +106,7 @@ export default class HomeController extends Controller {
   @action
   async removeFood(food, meal) {
     const foodToDelete = await this.store.peekRecord('food', food.id);
-    console.log(foodToDelete)
+    console.log(foodToDelete);
     foodToDelete.destroyRecord();
     this.foods.removeObject(food);
     this.foods = this.foods;

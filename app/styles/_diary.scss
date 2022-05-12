@@ -98,3 +98,10 @@
     width: 60%;
   }
 }
+
+.diary-switch {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 15px;
+}

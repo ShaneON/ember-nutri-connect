@@ -16,25 +16,21 @@ export default class HomeProductController extends Controller {
 
   @action
   update(food, event) {
-    if (food.serving)
-      food.kcal = parseInt(food.kcal / (food.serving / 100));
-  
+    if (food.serving) food.kcal = parseInt(food.kcal / (food.serving / 100));
+
     this[event.target.id] = event.target.value;
     let serving = parseFloat(this[event.target.id]) / 100.0;
-    
-    if (serving > 0)
-      food.kcal = parseInt(food.kcal * serving);
-  
-    food.serving = serving * 100; 
+
+    if (serving > 0) food.kcal = parseInt(food.kcal * serving);
+
+    food.serving = serving * 100;
   }
 
   @action
   async addFood(food) {
     let servingTimes;
-    if (food.serving)
-      servingTimes = parseFloat(food.serving) / 100.0;
-    else
-      servingTimes = parseFloat(this.defaultServing) / 100.0;
+    if (food.serving) servingTimes = parseFloat(food.serving) / 100.0;
+    else servingTimes = parseFloat(this.defaultServing) / 100.0;
 
     food.protein = servingTimes * food.protein;
     food.fat = servingTimes * food.fat;
@@ -63,7 +59,7 @@ export default class HomeProductController extends Controller {
       fiber: food.fiber,
       serving: food.serving,
       meal: this.home.currentMeal,
-      dayOfYear: dateToday
+      dayOfYear: dateToday,
     });
 
     saveFood = await saveFood.save();

@@ -24,7 +24,7 @@ export default class HomeRoute extends Route {
       .replaceAll('/', '');
     let foods = await this.store.query('food', {
       userId: user.id,
-      dayOfYear: dateToday
+      dayOfYear: dateToday,
     });
     return {
       user: user,
