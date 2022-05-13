@@ -1,16 +1,18 @@
-<div class="meal-list-item-container">
-  <li class="meal-list-item">
-    <h5 class="meal-list-item-header">{{@name}}</h5>
-  </li>
-</div>
-<ul>
-  {{#each @meal as |food index|}}
-    <li class="diary-list-item">
-      <div class="diary-list-item-content">
-        <div class="diary-list-item-item">{{food.name}}</div>
-        <div class="diary-list-item-item">{{food.serving}}g</div>
-        <div class="diary-list-item-item">{{food.kcal}}kcal</div>
-      </div>
+{{#if @meal}}
+  <div class="meal-list-item-container">
+    <li class="meal-list-item">
+      <h5 class="meal-list-item-header">{{meal-number-prune @name}}</h5>
     </li>
-  {{/each}}
-</ul>
+  </div>
+  <ul>
+    {{#each @meal as |food index|}}
+      <li class="diary-list-item">
+        <div class="diary-list-item-content">
+          <div class="diary-list-item-item">{{food.name}}</div>
+          <div class="diary-list-item-item">{{food.serving}}g</div>
+          <div class="diary-list-item-item">{{food.kcal}}kcal</div>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+{{/if}}

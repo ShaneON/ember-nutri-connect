@@ -42,7 +42,7 @@
 				<div class="diary-content">
 					<ul>
 						<div class="diary-switch">
-							<button class="generic-button  diary-button" {{on "click" (fn (mut this.isEditing) (not this.isEditing))}}>
+							<button class="generic-button  diary-button" type="button" {{on "click" (fn (mut this.isEditing) (not this.isEditing))}}>
 								Done
 							</button>
 						</div>
@@ -120,7 +120,7 @@
 				</div>
 			{{else}}
 				<div class="diary-switch">
-					<button class="generic-button diary-button" {{on "click" (fn (mut this.isEditing) (not this.isEditing))}}>
+					<button class="generic-button diary-button" type="button" {{on "click" (fn (mut this.isEditing) (not this.isEditing))}}>
 						Edit
 					</button>
 				</div>
