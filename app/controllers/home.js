@@ -106,7 +106,6 @@ export default class HomeController extends Controller {
   @action
   async removeFood(food, meal) {
     const foodToDelete = await this.store.peekRecord('food', food.id);
-    console.log(foodToDelete);
     foodToDelete.destroyRecord();
     this.foods.removeObject(food);
     this.foods = this.foods;
