@@ -38,80 +38,133 @@
 					Meal Planner
 				</div>	
 			</div>
-			<div class="diary-content">
-				<ul>
-					<DiaryItem
-						@name="Breakfast"
-						@meal={{this.breakfast}}
-						@searchFood={{this.searchFood}}
-						@update={{this.update}}
-						@removeFood={{this.removeFood}}
-						/>
-					<DiaryItem
-						@name="Snack 1"
-						@meal={{this.snack1}}
-						@searchFood={{this.searchFood}}
-						@update={{this.update}}
-						@removeFood={{this.removeFood}}
-						/>
-					<DiaryItem
-						@name="Brunch"
-						@meal={{this.brunch}}
-						@searchFood={{this.searchFood}}
-						@update={{this.update}}
-						@removeFood={{this.removeFood}}
-						/>
-					<DiaryItem
-						@name="Snack 2"
-						@meal={{this.snack2}}
-						@searchFood={{this.searchFood}}
-						@update={{this.update}}
-						@removeFood={{this.removeFood}}
-						/>
-					<DiaryItem
-						@name="Lunch"
-						@meal={{this.lunch}}
-						@searchFood={{this.searchFood}}
-						@update={{this.update}}
-						@removeFood={{this.removeFood}}
-						/>
-					<DiaryItem
-						@name="Snack 3"
-						@meal={{this.snack3}}
-						@searchFood={{this.searchFood}}
-						@update={{this.update}}
-						@removeFood={{this.removeFood}}
-						/>
-					<DiaryItem
-						@name="Dinner"
-						@meal={{this.dinner}}
-						@searchFood={{this.searchFood}}
-						@update={{this.update}}
-						@removeFood={{this.removeFood}}
-						/>
-					<DiaryItem
-						@name="Snack 4"
-						@meal={{this.snack4}}
-						@searchFood={{this.searchFood}}
-						@update={{this.update}}
-						@removeFood={{this.removeFood}}
-						/>
-					<DiaryItem
-						@name="Supper"
-						@meal={{this.supper}}
-						@searchFood={{this.searchFood}}
-						@update={{this.update}}
-						@removeFood={{this.removeFood}}
-						/>
-					<DiaryItem
-						@name="Snack 5"
-						@meal={{this.snack5}}
-						@searchFood={{this.searchFood}}
-						@update={{this.update}}
-						@removeFood={{this.removeFood}}
-						/>
-				</ul>
-			</div>
+			{{#if this.isEditing}}
+				<div class="diary-content">
+					<ul>
+						<div class="diary-switch">
+							<button class="generic-button  diary-button" type="button" {{on "click" (fn (mut this.isEditing) (not this.isEditing))}}>
+								Done
+							</button>
+						</div>
+						<DiaryEditItem
+							@name="Breakfast"
+							@meal={{this.breakfast}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							@removeFood={{this.removeFood}}
+							/>
+						<DiaryEditItem
+							@name="Snack 1"
+							@meal={{this.snack1}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							@removeFood={{this.removeFood}}
+							/>
+						<DiaryEditItem
+							@name="Brunch"
+							@meal={{this.brunch}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							@removeFood={{this.removeFood}}
+							/>
+						<DiaryEditItem
+							@name="Snack 2"
+							@meal={{this.snack2}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							@removeFood={{this.removeFood}}
+							/>
+						<DiaryEditItem
+							@name="Lunch"
+							@meal={{this.lunch}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							@removeFood={{this.removeFood}}
+							/>
+						<DiaryEditItem
+							@name="Snack 3"
+							@meal={{this.snack3}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							@removeFood={{this.removeFood}}
+							/>
+						<DiaryEditItem
+							@name="Dinner"
+							@meal={{this.dinner}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							@removeFood={{this.removeFood}}
+							/>
+						<DiaryEditItem
+							@name="Snack 4"
+							@meal={{this.snack4}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							@removeFood={{this.removeFood}}
+							/>
+						<DiaryEditItem
+							@name="Supper"
+							@meal={{this.supper}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							@removeFood={{this.removeFood}}
+							/>
+						<DiaryEditItem
+							@name="Snack 5"
+							@meal={{this.snack5}}
+							@searchFood={{this.searchFood}}
+							@update={{this.update}}
+							@removeFood={{this.removeFood}}
+							/>
+					</ul>
+				</div>
+			{{else}}
+				<div class="diary-switch">
+					<button class="generic-button diary-button" type="button" {{on "click" (fn (mut this.isEditing) (not this.isEditing))}}>
+						Edit
+					</button>
+				</div>
+				<DiaryItem
+					@name="Breakfast"
+					@meal={{this.breakfast}}
+					/>
+				<DiaryItem
+					@name="Snack 1"
+					@meal={{this.snack1}}
+					/>
+				<DiaryItem
+					@name="Brunch"
+					@meal={{this.brunch}}
+					/>
+				<DiaryItem
+					@name="Snack 2"
+					@meal={{this.snack2}}
+					/>
+				<DiaryItem
+					@name="Lunch"
+					@meal={{this.lunch}}
+					/>
+				<DiaryItem
+					@name="Snack 3"
+					@meal={{this.snack3}}
+					/>
+				<DiaryItem
+					@name="Dinner"
+					@meal={{this.dinner}}
+					/>
+				<DiaryItem
+					@name="Snack 4"
+					@meal={{this.snack4}}
+					/>
+				<DiaryItem
+					@name="Supper"
+					@meal={{this.supper}}
+					/>
+				<DiaryItem
+					@name="Snack 5"
+					@meal={{this.snack5}}
+					/>
+			{{/if}}
 		</div>
 	</div>
 </div>
