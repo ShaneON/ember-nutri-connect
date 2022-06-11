@@ -1,20 +1,24 @@
 <ModalDialog @onClickOverlay={{this.closeModal}}>
   <div class="product-list-container">
-    <div class="product-list-header">
-      <h6>Name</h6>
-      <h6>Serving</h6>
-      <h6>Kcal</h6>
+    <div class="table-responsive">
+      <table class="table table-vcenter card-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Serving</th>
+            <th>kcal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each this.products as |food|}}
+            <tr>
+              <td role="button" {{on "click" (fn this.addFood food)}}>{{truncate food.name 80}}</td>
+              <td class="text-muted"><input class="product-list-input" type="number" id="serving" value="100" {{on "input" (fn this.update food)}}>  grams</td>
+              <td class="text-muted">{{food.kcal}} kcal</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
     </div>
-    <ul class="product-list">
-      {{#each this.products as |food|}}
-        {{!-- {{#if (and food.name food.kcal)}} --}}
-          <li class="product-list-item">
-            <h3 class="product-name" {{on "click" (fn this.addFood food)}}>{{food.name}}</h3>
-            <div class="input-container"><input class="product-list-input" type="number" id="serving" value="100" {{on "input" (fn this.update food)}}> <p>grams</p></div>
-            <p>{{food.kcal}} kcal</p>
-          </li>
-        {{!-- {{/if}} --}}
-      {{/each}}
-    </ul>
   </div>
 </ModalDialog>

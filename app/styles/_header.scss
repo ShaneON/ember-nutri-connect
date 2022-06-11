@@ -2,13 +2,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(230,137,97);
-    background: linear-gradient(90deg, rgba(230,137,97,1) 37%, rgba(193,29,49,1) 91%);
+    background: #f2b9ac;
     height: 80px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    font-family: 'Manrope', sans-serif;
     
     &-title {
-        color: white;
+        font-size: 30px;
+        color: #241211;
     }
     
 }
