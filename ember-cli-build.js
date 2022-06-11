@@ -20,5 +20,8 @@ module.exports = function (defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
+  app.import('node_modules/@tabler/core/dist/css/tabler.css');
+  app.import('node_modules/@tabler/core/dist/js/tabler.min.js');
+
   return app.toTree();
 };
