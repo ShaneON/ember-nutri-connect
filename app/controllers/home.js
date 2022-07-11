@@ -6,8 +6,17 @@ import { filterBy } from '@ember/object/computed';
 import { tracked } from '@glimmer/tracking';
 
 const MEALLIST = ['Breakfast', 'Lunch', 'Dinner', 'Snack', 'Brunch', 'Supper'];
+const DATE_OPTIONS = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+};
 
 export default class HomeController extends Controller {
+
+  dateToday = new Date().toLocaleDateString('en-GB', DATE_OPTIONS);
+
   @service router;
   @service session;
   @service store;
