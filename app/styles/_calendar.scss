@@ -1,4 +1,10 @@
 .calendar {
+  display: flex;
+  flex-direction: column;
   border: none;
   margin-bottom: 20px;
+
+  &-input {
+    margin-top: 5px;
+  }
 }

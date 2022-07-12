@@ -2,7 +2,8 @@
 
 <div class="home-container">
 	<div class="calendar">
-		{{this.dateToday}}
+		{{this.diaryDate}}
+		<input class="calendar-input" type="date" id="diaryDate" {{on "change" this.update}}> 
 	</div>
 	<div class="home-content">
 		<div class="user-info-container">
